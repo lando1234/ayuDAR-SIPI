@@ -6,7 +6,6 @@ import mision from '../images/mision.jpg';
 import objetivos from '../images/objetivos.png';
 import valores from '../images/valores.png';
 import Header from '../components/Header';
-import Image from 'next/image';
 
 
 const About = () => {

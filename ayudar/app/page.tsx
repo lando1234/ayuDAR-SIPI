@@ -19,7 +19,6 @@ import AlimentosPequenaIcon from './icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
-import Image from 'next/image';
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
