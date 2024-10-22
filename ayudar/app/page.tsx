@@ -19,6 +19,7 @@ import AlimentosPequenaIcon from './icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
+import Image from 'next/image';
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const Home = () => {
             <h1 className="text-xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
             <p className="text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
             <button>
-              <img src={SaberMas.src} alt="Saber Más"  className="h-10" />
+              <Image src={SaberMas.src} alt="Saber Más!"   height="10" width="10"/>
             </button>
         </section>
       {/* Main Content */}
