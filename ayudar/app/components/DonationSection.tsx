@@ -2,8 +2,6 @@
 import { FC } from 'react';
 import DonationCard from './DonationCard';
 import AvatarUno from '../icons/AvatarUno.png';
-import AvatarDos from '../icons/AvatarDos.png';
-import AvatarTres from '../icons/AvatarTres.png';
 import AlimentosPequenaIcon from '../icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from '../icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from '../icons/VoluntariadoPequenoIcon.png';
