@@ -47,7 +47,7 @@ const DonationCard: FC<DonationCardProps> = ({
           <p className="text-sm text-[#1C252E]">{description}</p>
           <div className="flex mt-2 space-x-2">
             {icons.map((icon, index) => (
-              <img key={index} src={icon.src} alt={icon.alt} className="h-4 w-4" />
+              <img key={index} src={icon.src} alt={icon.alt} className="h-7 w-7" />
             ))}
           </div>
         </div>
