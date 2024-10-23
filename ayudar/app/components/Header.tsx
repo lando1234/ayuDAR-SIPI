@@ -12,36 +12,38 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
   return (
     <>
       {/* Barra de navegación */}
-      <header className="flex justify-between items-center p-4 mb-0" style={{ backgroundColor: '#1E8F62', color: 'white' }}>
-        <button
-          className="p-2 md:hidden" // Mostrar solo en pantallas pequeñas
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+      <header className="flex justify-between items-center p-4 mb-0 md:hidden" style={{ backgroundColor: '#1E8F62', color: 'white' }}>
+  <button
+    className="p-2" // Este botón se muestra solo en responsive
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 6h16M4 12h16M4 18h16"
+      />
+    </svg>
+  </button>
 
-        {/* Logo para Mobile */}
-        <div className="flex justify-center md:hidden">
-          <Link href="../home">
-            <img src={logoSrc} alt="AYUDAR" className="h-8" />
-          </Link>
-        </div>
+  {/* Logo para Mobile */}
+  <div className="flex justify-center">
+    <Link href="../home">
+      <img src={logoSrc} alt="AYUDAR" className="h-8" />
+    </Link>
+  </div>
 
-        <div className="w-6 md:hidden"></div> {/* Placeholder para balancear el espacio en mobile */}
-      </header>
+  {/* Placeholder para balancear el espacio en mobile */}
+  <div className="w-6"></div>
+</header>
+
 
       {/* Menu Drawer para pantallas pequeñas */}
       <div

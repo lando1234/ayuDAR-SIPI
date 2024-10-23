@@ -19,7 +19,6 @@ import AlimentosPequenaIcon from './icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
-import Image from 'next/image';
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,40 +32,81 @@ const Home = () => {
         drawerLogoSrc={logo.src} 
       />
 
-      <section
-            className="bg-cover bg-center shadow  p-4 text-center"
-            style={{ backgroundImage: `url(${fondo.src})` }}>
-            <h1 className="text-xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
-            <p className="text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
+
+        {/* Sección para pantallas pequeñas */}
+        <section
+          className="bg-cover bg-center shadow p-4 text-center md:hidden"
+          style={{ backgroundImage: `url(${fondo.src})` }}
+        >
+          <h1 className="text-xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
+          <p className="text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
+          <button>
+            <img src={SaberMas.src} alt="Saber Más" className="h-10" />
+          </button>
+        </section>
+
+          {/* Sección para pantallas medianas y grandes */}
+          <section
+          className="hidden md:flex bg-cover bg-center shadow p-4 text-center min-h-screen flex-col justify-center"
+          style={{ backgroundImage: `url(${fondo.src})` }}
+        >
+          <h1 className="text-4xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
+          <p className="text-2xl text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
+          <div className="flex justify-center">
             <button>
-              <Image src={SaberMas.src} alt="Saber Más!"   height="10" width="10"/>
+              <img src={SaberMas.src} alt="Saber Más" className="h-10" />
             </button>
+          </div>
         </section>
       {/* Main Content */}
       <main className="p-4">
 
+{/* Sección para pantallas pequeñas */}
 
-        <section className="mt-2">
-          <h2 className="text-lg font-semibold mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
-          <div className="grid grid-cols-4 gap-4">
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain"  />
-              <p className="mt-0 text-black" style={{ marginTop: '-18px' }}>Voluntariado</p>
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain"  />
-              <p className="mt-0 text-black" style={{ marginTop: '-18px' }}>Donación Económica</p>
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain"  />
-              <p className="mt-0 text-black" style={{ marginTop: '-18px' }}>Indumentaria</p>
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain"  />
-              <p className="mt-0 text-black" style={{ marginTop: '-18px' }}>Alimentos</p>
-            </div>
-          </div>
-        </section>
+      <section className="mt-2  md:hidden">
+  <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
+  <div className="grid grid-cols-4 gap-4">
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Voluntariado</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Donación Económica</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Indumentaria</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Alimentos</p> {/* Ajuste del tamaño del texto */}
+    </div>
+  </div>
+</section>
+
+{/* Sección para pantallas medianas y grandes */}
+<section className="mt-2 hidden md:block">
+  <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
+  <div className="grid grid-cols-4 gap-4">
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Voluntariado</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Donación Económica</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Indumentaria</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Alimentos</p> {/* Ajuste del margen superior */}
+    </div>
+  </div>
+</section>
 
       <section className="mt-2">
   <h2 className="text-lg font-semibold mb-4 text-black">Enterate qué necesita cada comedor</h2>
@@ -95,7 +135,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-          
+
 
        {/* Otra tarjeta*/}
       <div className="bg-white shadow rounded-lg p-4 flex items-center">
@@ -143,7 +183,7 @@ const Home = () => {
           </div>
       </div>
     </div>
-   
+
   </div>
 </section>
       </main>
