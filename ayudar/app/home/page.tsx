@@ -18,7 +18,6 @@ import CheckCompleto from '../icons/CheckCompletoIcon.png';
 import AlimentosPequenaIcon from '../icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from '../icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from '../icons/VoluntariadoPequenoIcon.png';
-import Link from 'next/dist/client/link';
 import Header from '../components/Header';
 
 const Home = () => {
@@ -47,7 +46,7 @@ const Home = () => {
 
 
         <section className="mt-2">
-          <h2 className="text-lg font-semibold mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
+            <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
           <div className="grid grid-cols-4 gap-4">
             <div className="p-4 rounded-lg flex flex-col items-center">
               <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
