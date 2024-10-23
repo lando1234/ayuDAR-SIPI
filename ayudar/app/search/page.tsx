@@ -2,8 +2,8 @@ import Header from "@/app/components/Header";
 import React, { useState } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import logoLetras from "../../icons/LogoLetras.png";
-import logo from "../../icons/Logo.png";
+import logoLetras from "../icons/LogoLetras.png";
+import logo from "../icons/Logo.png";
 import noConnection from "../images/noConnection.png";
 import CheckIncompleto from "../../icons/CheckIncompletoIcon.png";
 import CheckCompleto from "../../icons/CheckCompletoIcon.png";
@@ -63,13 +63,19 @@ const Search = () => {
             <span className="sr-only">Filtro de provincias</span>
           </button>
         </div>
+        
         {!showCards ? (
           <div className="bg-white flex items-center justify-center flex-col h-96">
             <FaMagnifyingGlass className="text-primary" size={80} />
             <span className="text-gray-400 mt-3">Descubre comedores</span>
           </div>
         ) : (
+          <div>
+            <span className="text-black">
+          Resultados de tu busqueda
+          </span>
           <OrganizationSection />
+          </div>
         )}
       </div>
 
