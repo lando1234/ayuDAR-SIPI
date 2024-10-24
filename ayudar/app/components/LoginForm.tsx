@@ -1,20 +1,22 @@
 "use client";  // Añadir esta línea para que el componente sea un Client Component
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import LogoInicioSesion from '../icons/LogoInicioSesion.png';
 import Link from 'next/link';
-
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+      
     if (email === 'admin' && password === 'admin') {
       alert('Inicio de sesión exitoso');
+      router.push('./'); // Redirigir a la página principal
     } else {
       setError('Usuario o contraseña incorrectos');
     }
@@ -25,7 +27,7 @@ const LoginForm = () => {
       <div className="bg-white shadow-lg rounded-lg p-6 w-96">
         <div className="flex justify-center mb-6">
           {/* Logo */}
-        <img src={LogoInicioSesion.src} alt="Logo" className="h-16" />
+          <img src={LogoInicioSesion.src} alt="Logo" className="h-16" />
         </div>
         <h2 className="text-center text-xl font-semibold mb-4 text-black">Inicia sesión en Ayudar</h2>
         <form onSubmit={handleSubmit} className="space-y-4 mt-16">
@@ -59,15 +61,15 @@ const LoginForm = () => {
           <button
             type="submit"
             className="w-full bg-[#A8F0D5] border-2 border-[#1E8F62] text-[#065F46] py-2 rounded-[20px] hover:bg-[#86E4C4] transition font-bold "
-            >
+          >
             Iniciar sesión
-            </button>
+          </button>
         </form>
         <div className="text-center text-sm mt-10 text-black">
-        <p>¿No tenés cuenta?</p>
-            <Link href="/register" className="underline font-bold">
+          <p>¿No tenés cuenta?</p>
+          <Link href="/register" className="underline font-bold">
             Regístrate acá
-            </Link>
+          </Link>
         </div>
       </div>
     </div>
@@ -75,4 +77,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-    

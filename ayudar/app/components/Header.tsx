@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
+
+
 interface HeaderProps {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
@@ -35,7 +37,7 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
 
   {/* Logo para Mobile */}
   <div className="flex justify-center">
-    <Link href="../home">
+    <Link href="./">
       <img src={logoSrc} alt="AYUDAR" className="h-8" />
     </Link>
   </div>
