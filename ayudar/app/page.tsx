@@ -20,6 +20,7 @@ import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
 
+
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -188,6 +189,7 @@ const Home = () => {
 </section>
       </main>
     </div>
+
   );
 };
 
