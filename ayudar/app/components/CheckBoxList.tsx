@@ -1,11 +1,12 @@
 const CheckBoxList = () => {
-  
-  /*interface checkBoxItem {
-    id: number;
-    name: String;
-  }*/
 
-  const provinces = [
+  interface CheckBoxItem {
+    id: number;
+    name: string;
+  }
+
+
+  const provinces:CheckBoxItem[]  = [
     {
       id: 1,
       name: "Buenos Aires",
@@ -106,7 +107,10 @@ const CheckBoxList = () => {
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
+<<<<<<< HEAD
       {/*Se borro index que estaba como .map((item,index)) no estaba en uso*/ }
+=======
+>>>>>>> a3281769d2f01830ca4a23b73de6764e2bd86628
       {provinces.map((item) => (
         <div className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2" key={item.id}>
           <input

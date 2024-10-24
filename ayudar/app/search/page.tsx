@@ -24,6 +24,7 @@ const Search = () => {
     setSearch(event.target.value);
     /*Despues sacar*/
     if (event.target.value.length == 0) {
+      console.log(search)
       setShowCards(false);
     } else {
       setShowCards(true);
