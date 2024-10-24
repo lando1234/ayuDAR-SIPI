@@ -1,10 +1,10 @@
 const CheckBoxList = () => {
-  interface checkBoxItem {
+  interface CheckBoxItem {
     id: number;
-    name: String;
+    name: string;
   }
 
-  const provinces = [
+  const provinces:CheckBoxItem[]  = [
     {
       id: 1,
       name: "Buenos Aires",
@@ -105,7 +105,7 @@ const CheckBoxList = () => {
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
-      {provinces.map((item, index) => (
+      {provinces.map((item) => (
         <div className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2" key={item.id}>
           <input
             type="checkbox"
