@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import logoLetras from '../icons/LogoLetras.png';
 import logo from '../icons/Logo.png';
-import Link from 'next/dist/client/link';
 import mision from '../images/mision.jpg';
 import objetivos from '../images/objetivos.png';
 import valores from '../images/valores.png';
@@ -27,7 +26,7 @@ const About = () => {
         <section className="mt-8 text-center text-[#00000]">
         <h2 className="text-lg font-semibold mb-4 text-black">Nuestra misión</h2>
         <div className="flex justify-center items-center">
-          <img src={mision.src} className="w-40 h-40 object-contain" />
+          <img src={mision.src} alt="misión" className="w-40 h-40 object-contain" />
         </div>
           <p className="text-black text-center">
             Facilitar la conexión entre donantes y comedores comunitarios en Argentina, asegurando una distribución eficiente
@@ -38,7 +37,7 @@ const About = () => {
         <section className="mt-8 text-center text-[#00000]">
         <h2 className="text-lg font-semibold mb-4 text-black">Nuestros valores</h2>
         <div className="flex justify-center items-center">
-          <img src={valores.src} className="w-40 h-40 object-contain" />
+          <img src={valores.src} alt="valores" className="w-40 h-40 object-contain" />
         </div>
           <p className="text-black text-center">
             Nuestros valores se centran en la solidaridad, fomentando la ayuda mutua entre personas y comunidades; 
@@ -50,7 +49,7 @@ const About = () => {
         <section className="mt-8 text-center text-[#00000]">
         <h2 className="text-lg font-semibold mb-4 text-black">Nuestros objetivos</h2>
         <div className="flex justify-center items-center">
-          <img src={objetivos.src} className="w-40 h-40 object-contain" />
+          <img src={objetivos.src} alt="objetivos" className="w-40 h-40 object-contain" />
         </div>
           <p className="text-black text-center">
           Nuestros objetivos son conectar a donantes con los comedores que más lo necesitan, asegurar transparencia y 
