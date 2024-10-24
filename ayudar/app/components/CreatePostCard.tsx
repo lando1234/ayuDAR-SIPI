@@ -36,7 +36,7 @@ const CreatePostCard: FC = () => {
         placeholder="Escribe el título..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full border-b border-gray-300 focus:outline-none focus:border-gray-500"
+        className="text-gray-600 w-full border-b border-gray-300 focus:outline-none focus:border-gray-500"
       />
 
       {/* Área de contenido con opciones de formato */}
@@ -50,7 +50,7 @@ const CreatePostCard: FC = () => {
           <FiAlignRight className="cursor-pointer" />
         </div>
         <textarea
-          className="w-full p-2 resize-none focus:outline-none"
+          className="w-full p-2 resize-none focus:outline-none text-gray-600"
           rows={3}
           placeholder="Haz tu pedido a la comunidad"
           value={content}
