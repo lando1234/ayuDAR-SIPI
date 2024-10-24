@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import logoLetras from '../icons/LogoLetras.png';
 import logo from '../icons/Logo.png';
+import Link from 'next/dist/client/link';
 import mision from '../images/mision.jpg';
 import objetivos from '../images/objetivos.png';
 import valores from '../images/valores.png';
