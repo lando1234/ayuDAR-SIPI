@@ -15,6 +15,7 @@ const LoginForm = () => {
     e.preventDefault();
       
     if (email === 'admin' && password === 'admin') {
+      sessionStorage.setItem('session',email+"-"+password); // Guardar el inicio de sesión en el sessionStorage
       alert('Inicio de sesión exitoso');
       router.push('./'); // Redirigir a la página principal
     } else {

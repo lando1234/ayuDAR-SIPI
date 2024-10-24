@@ -1,8 +1,9 @@
 const CheckBoxList = () => {
-  interface checkBoxItem {
+  
+  /*interface checkBoxItem {
     id: number;
     name: String;
-  }
+  }*/
 
   const provinces = [
     {
@@ -105,7 +106,8 @@ const CheckBoxList = () => {
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
-      {provinces.map((item, index) => (
+      {/*Se borro index que estaba como .map((item,index)) no estaba en uso*/ }
+      {provinces.map((item) => (
         <div className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2" key={item.id}>
           <input
             type="checkbox"

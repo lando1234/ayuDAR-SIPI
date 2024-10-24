@@ -5,17 +5,12 @@ import { FaFilter, FaSearch } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import logoLetras from "../icons/LogoLetras.png";
 import logo from "../icons/Logo.png";
-import noConnection from "../images/noConnection.png";
-import CheckIncompleto from "../../icons/CheckIncompletoIcon.png";
-import CheckCompleto from "../../icons/CheckCompletoIcon.png";
-import AvatarUno from "../../icons/AvatarUno.png";
-import VoluntariadoPequenoIcon from "../../icons/VoluntariadoPequenoIcon.png";
-import OrganizationCard from "@/app/components/OrganizationCard";
 import OrganizationSection from "@/app/components/OrganizationSection";
 import CheckBoxList from "@/app/components/CheckBoxList";
 
 const Search = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  {/*  const [search, setSearch] = useState(""); SE ELIMINO EL SEARCH, NO SE USABA*/}
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
 

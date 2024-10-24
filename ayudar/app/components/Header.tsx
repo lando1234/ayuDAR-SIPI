@@ -11,6 +11,10 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc }) => {
+  const handleLogout = () => {
+    sessionStorage.removeItem('session');
+    window.location.href = '../login';
+  }
   return (
     <>
       {/* Barra de navegación */}
@@ -61,21 +65,24 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
             </button>
           </div>
         )}
+        <div className="flex flex-col justify-between">
         <div className="flex flex-col space-y-4">
           <div className="border-b border-white pb-2">
-            <Link href="#">Buscar comedores</Link>
+            <Link href="../search">Buscar comedores</Link>
           </div>
           <div className="border-b border-white pb-2">
             <Link href="../about">Nosotros</Link>
           </div>
           <Link href="../login">Ingresa como comedor</Link>
         </div>
+        <button onClick={handleLogout} className='self-end'>Cerrar sesión</button>
+      </div>
       </div>
 
       {/* Menu para pantallas grandes */}
       <div className="hidden md:flex items-center justify-between p-4" style={{ backgroundColor: '#1E8F62', color: 'white' }}>
         <div className="flex items-center space-x-8">
-          <Link href="#" className="no-underline text-white">Buscar comedores</Link>
+          <Link href="../search" className="no-underline text-white">Buscar comedores</Link>
           <Link href="../about" className="no-underline text-white">Nosotros</Link>
           <Link href="../login" className="no-underline text-white">Ingresa como comedor</Link>
         </div>
