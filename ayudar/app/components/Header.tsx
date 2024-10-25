@@ -88,7 +88,14 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
             {!isLoggedIn && (
               <Link href="../login" className="block mb-4">Ingresa como comedor</Link>
             )}
+            {/* Solo mostrar "Mi perfil" si SI está logueado */}
+            {isLoggedIn && (
+              <Link href="../pagina_comedor_perfil" className="block mb-4">Mi perfil</Link>
+            )}
+          
           </div>
+
+
 
           {/* Solo mostrar el botón "Cerrar sesión" si está logueado */}
           {isLoggedIn && (
@@ -114,7 +121,11 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
           {!isLoggedIn && (
             <Link href="../login" className="no-underline text-white">Ingresa como comedor</Link>
           )}
-
+          {/* Solo mostrar "Mi perfil" si SI está logueado */}
+            {isLoggedIn && (
+              <Link href="../login" className="no-underline text-white">Mi perfil</Link>
+            )}
+          
           {/* Solo mostrar el botón "Cerrar sesión" si está logueado */}
           {isLoggedIn && (
             <button onClick={handleLogout} className="no-underline text-white">Cerrar sesión</button>
