@@ -54,12 +54,16 @@ const Home = () => {
 
       {/* Sección para pantallas medianas y grandes */}
       <section
-        className="hidden md:flex bg-cover bg-center shadow p-4 text-center min-h-screen flex-col justify-center"
+        className="relative hidden md:flex bg-cover bg-center shadow p-4 text-center min-h-screen flex-col justify-center"
         style={{ backgroundImage: `url(${fondo.src})` }}
       >
-        <h1 className="text-4xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
-        <p className="text-2xl text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
-        <div className="flex justify-center">
+        {/* Capa de oscuridad */}
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
+
+        <div className="relative z-10">
+          <h1 className="text-4xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
+          <p className="text-2xl text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
           <button>
             <img src={SaberMas.src} alt="Saber Más" className="h-10" />
           </button>
