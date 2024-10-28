@@ -100,7 +100,7 @@ const CreatePostCard: FC = () => {
             organization="Comedor Granito de Arena"
             isCompleted={post.isCompleted}
             description={`${post.content} \nTipo de donación: ${post.donationType}`} // Añadimos el tipo de donación a la descripción
-            icons={[{ src: AiOutlineFileImage.src, alt: 'Icono' }]} // Puedes agregar más íconos aquí
+            icons={[]} // Puedes agregar más íconos aquí
           />
         ))}
       </div>
