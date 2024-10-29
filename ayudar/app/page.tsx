@@ -20,6 +20,7 @@ import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
 
+
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -74,27 +75,81 @@ const Home = () => {
 
         {/* Sección para pantallas pequeñas */}
 
-        <section className="mt-2  md:hidden">
-          <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
-          <div className="grid grid-cols-4 gap-4">
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
-              <p className="mt-0 text-sm text-black" style={{ marginTop: '-10px' }}>Voluntariado</p> {/* Ajuste del tamaño del texto */}
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain" />
-              <p className="mt-0 text-sm text-black" style={{ marginTop: '-10px' }}>Fondos</p> {/* Ajuste del tamaño del texto */}
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain" />
-              <p className="mt-0 text-sm text-black" style={{ marginTop: '-10px' }}>Indumentaria</p> {/* Ajuste del tamaño del texto */}
-            </div>
-            <div className="p-4 rounded-lg flex flex-col items-center">
-              <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain" />
-              <p className="mt-0 text-sm text-black" style={{ marginTop: '-10px' }}>Alimentos</p> {/* Ajuste del tamaño del texto */}
+
+      <section className="mt-2  md:hidden">
+  <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
+  <div className="grid grid-cols-4 gap-4">
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Voluntariado</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Donación Económica</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Indumentaria</p> {/* Ajuste del tamaño del texto */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain" />
+      <p className="mt-0 text-sm text-black" style={{ marginTop: '-18px' }}>Alimentos</p> {/* Ajuste del tamaño del texto */}
+    </div>
+  </div>
+</section>
+
+{/* Sección para pantallas medianas y grandes */}
+<section className="mt-2 hidden md:block">
+  <h2 className="text-lg font-medium mb-2 text-center text-black" style={{ marginBottom: '-18px' }}>¿Qué podés donar?</h2>
+  <div className="grid grid-cols-4 gap-4">
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={VoluntarioIcon.src} alt="Voluntariado" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Voluntariado</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={DineroIcon.src} alt="Donación Económica" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Donación Económica</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={IndumentariaIcon.src} alt="Indumentaria" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Indumentaria</p> {/* Ajuste del margen superior */}
+    </div>
+    <div className="p-4 rounded-lg flex flex-col items-center">
+      <img src={AlimentosIcon.src} alt="Alimentos" className="w-20 h-20 object-contain" />
+      <p className="mt-2 text-black">Alimentos</p> {/* Ajuste del margen superior */}
+    </div>
+  </div>
+</section>
+
+
+       {/*  tarjeta*/}
+            <section className="mt-2">
+        <h2 className="text-lg font-semibold mb-4 text-black">Enterate qué necesita cada comedor</h2>
+        <div className="space-y-4">
+      <div className="bg-white shadow rounded-lg p-4 flex items-start">
+        <img src={AvatarUno.src} alt="Avatar Uno" className="h-8 mr-3 mt-2" />
+            <div>
+              <h3 className="font-bold text-black">Colecta día del niño</h3>
+              <p className="text-xs text-[#919EAB]">
+                10 Julio 2022 - Comedor Granito de Arena
+              </p>
+              <div className="flex items-center mt-2">
+                <img src={CheckIncompleto.src} alt="Check Incompleto" className="h-4 w-4 mr-2" />
+                <p className="text-sm text-[#6AB8E2]" >
+                  Todavía podes ayudar en este pedido
+                </p>
+              </div>
+              <div className="mt-2">
+                <p className="text-sm text-[#1C252E]">
+                  Estamos en la búsqueda de juguetes y dulces para armar bolsitas y regalarle a los chicos en su día! Es para la segunda semana de Agosto 🗓️
+                </p>
+                <div className="flex mt-2 space-x-2">
+                  <img src={AlimentosPequenaIcon.src} alt="Alimentos" className="h-4 w-4" />
+                  <img src={IndumentariaPequenaIcon.src} alt="Indumentaria" className="h-4 w-4" />
+                </div>
+              </div>
             </div>
           </div>
-        </section>
 
         {/* Sección para pantallas medianas y grandes */}
         <section className="mt-2 hidden md:block">
@@ -199,6 +254,7 @@ const Home = () => {
         </section>
       </main>
     </div>
+
   );
 };
 

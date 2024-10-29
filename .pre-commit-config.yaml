@@ -1,1 +1,9 @@
-repos: []
+repos:
+  - repo: local
+    hooks:
+      - id: npm-lint
+        name: Run npm lint
+        entry: bash -c "cd ayudar && npm run lint && npm run build"
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
