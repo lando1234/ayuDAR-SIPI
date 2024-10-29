@@ -57,7 +57,6 @@ const CheckBoxList: React.FC<CheckBoxListProps> = ({
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
-      {/*Se borro index que estaba como .map((item,index)) no estaba en uso*/}
       {provinces.map((province) => (
         <div
           className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2"

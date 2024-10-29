@@ -10,7 +10,7 @@ import phone from '../icons/phone.png';
 import address from '../icons/address.png';
 import mail from '../icons/mail.png';
 import DonationSection from '../components/DonationSection';
-import CreatePostCard from '../components/CreatedPostCard';
+import CreatePostCard from '../components/CreatePostCard';
 import { FiEdit2, FiCheck, FiX } from 'react-icons/fi'; // Iconos para editar y guardar/cancelar
 
 const ComedorPaginaInstitucional_perfil = () => {
