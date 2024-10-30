@@ -33,7 +33,7 @@ const page = () => {
           {/* Buttons Section */}
           <div className="flex flex-col space-y-4">
             <Link
-              href="location"
+              href="/register/location"
               className="w-full bg-lightGreen text-primary font-semibold py-2 rounded-full hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-400"
             >
               Registrarse como comedor
