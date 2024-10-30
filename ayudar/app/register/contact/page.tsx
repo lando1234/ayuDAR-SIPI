@@ -1,6 +1,7 @@
 "use client";
 
 import RegisterBase from "@/app/components/register/RegisterBase";
+import Link from "next/link";
 import React from "react";
 import { FaImage, FaPlus } from "react-icons/fa";
 
@@ -57,12 +58,13 @@ const Contact = () => {
         </div>
 
         <div className="flex justify-end">
-          <button
+          <Link
+            href="congrats"
             type="submit"
             className="rounded-full mt-4 py-2 px-6 bg-green-200 text-green-800 font-semibold  hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
           >
             Finalizar
-          </button>
+          </Link>
         </div>
       </form>
     </RegisterBase>
