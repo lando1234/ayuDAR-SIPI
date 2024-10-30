@@ -1,97 +1,102 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import RegisterBase from "@/app/components/register/RegisterBase";
 
 const Location = () => {
   return (
-<div className="bg-primary max-w-md mx-auto mt-10 p-6  rounded-lg shadow-md">
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-left">
-          <span className="text-green-600 font-bold text-lg">1 de 3</span>
-          <p className="text-sm text-gray-600">Información general</p>
-        </div>
-        <div className="h-10 w-10 rounded-full border border-gray-300 flex items-center justify-center">
-          <span className="text-green-600 font-bold"><img src="" alt="" /></span>
-        </div>
-      </div>
-      <form>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="comedor">
+    <RegisterBase
+      progress={1}
+      title="Registra tu comedor"
+      subtitle="Información general"
+    >
+      <form className="min-h-screen rounded-3xl bg-white p-6 rounded-b-lg w-full max-w-md text-gray-400 space-y-4">
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="nombre">
             Nombre del comedor *
           </label>
           <input
-            id="comedor"
             type="text"
-            placeholder="Nombre del comedor"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            id="nombre"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="reNaCom">
+
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="idRenacom">
             ID ReNaCom *
           </label>
           <input
-            id="reNaCom"
             type="text"
-            placeholder="ID ReNaCom"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            id="idRenacom"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="provincia">
+
+        <div className="flex space-x-4">
+          <div className="w-1/2">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="provincia"
+            >
               Provincia *
             </label>
             <select
               id="provincia"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              <option value="">Seleccionar</option>
-              <option value="Buenos Aires">Buenos Aires</option>
-              <option value="Córdoba">Córdoba</option>
-              {/* Agregar más opciones */}
+              <option value="">Seleccione</option>
+              <option value="prov1">Provincia 1</option>
+              <option value="prov2">Provincia 2</option>
             </select>
           </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="postal">
+          <div className="w-1/2">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="codPostal"
+            >
               Cod. Postal *
             </label>
             <input
-              id="postal"
               type="text"
-              placeholder="Cod. Postal"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              id="codPostal"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="localidad">
+
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="partido">
             Partido / Localidad *
           </label>
           <input
-            id="localidad"
             type="text"
-            placeholder="Partido / Localidad"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            id="partido"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="domicilio">
+
+        <div>
+          <label className="block text-sm font-medium mb-1" htmlFor="domicilio">
             Domicilio *
           </label>
           <input
-            id="domicilio"
             type="text"
-            placeholder="Domicilio"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            id="domicilio"
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300"
-        >
-          Continuar
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="rounded-full mt-4 py-2 px-6 bg-green-200 text-green-800 font-semibold  hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
+          >
+            Continuar
+          </button>
+        </div>
       </form>
-    </div>  )
-}
+    </RegisterBase>
+  );
+};
 
 export default Location;
