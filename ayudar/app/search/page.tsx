@@ -1,15 +1,13 @@
 "use client";
 import Header from "@/app/components/Header";
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import logoLetras from "../icons/LogoLetras.png";
-import logo from "../icons/Logo.png";
 import CheckBoxList, { Province } from "@/app/components/CheckBoxList";
 import OrganizationCard, { Organization } from "../components/OrganizationCard";
-import AvatarUno from '../icons/AvatarUno.png';
-import AvatarDos from '../icons/AvatarDos.png';
-import AvatarTres from '../icons/AvatarTres.png';
+import AvatarUno from "../icons/AvatarUno.png";
+import AvatarDos from "../icons/AvatarDos.png";
+import AvatarTres from "../icons/AvatarTres.png";
 
 const data = [
   {
@@ -279,7 +277,6 @@ const data = [
 ];
 
 const Search = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [organizations, setOrganizations] = useState(Array<Organization>);
@@ -314,12 +311,7 @@ const Search = () => {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <Header
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        logoSrc={logoLetras.src}
-        drawerLogoSrc={logo.src}
-      />
+      <Header />
 
       <div className="bg-white p-6">
         <div className="flex gap-3 ">

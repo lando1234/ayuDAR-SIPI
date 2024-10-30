@@ -1,76 +1,95 @@
-import React from 'react'
-import { FaEnvelope, FaFacebookF, FaGlobe, FaInstagram, FaLock, FaPhone } from 'react-icons/fa';
+"use client";
+
+import RegisterBase from "@/app/components/register/RegisterBase";
+import React from "react";
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaGlobe,
+  FaInstagram,
+  FaLock,
+  FaPhone,
+} from "react-icons/fa";
 
 const Profile = () => {
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-left">
-          <span className="text-green-600 font-bold text-lg">2 de 3</span>
-          <p className="text-sm text-gray-600">Datos de perfil</p>
-        </div>
-        <div className="h-10 w-10 rounded-full border border-gray-300 flex items-center justify-center">
-          <span className="text-green-600 font-bold">🟡</span>
-        </div>
-      </div>
-      <form>
+    <RegisterBase
+      progress={2}
+      title="Registra tu comedor"
+      subtitle="Datos del perfil"
+    >
+      <form className="min-h-screen rounded-3xl bg-white p-6 rounded-b-lg w-full max-w-md text-gray-700 space-y-4">
         <div className="mb-4 flex items-center">
-          <FaEnvelope className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaEnvelope className="text-gray-400" />
+          </div>
           <input
             type="email"
             placeholder="Email *"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div className="mb-4 flex items-center">
-          <FaLock className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaLock className="text-gray-400" />
+          </div>
           <input
             type="password"
             placeholder="Contraseña *"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div className="mb-4 flex items-center">
-          <FaPhone className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaPhone className="text-gray-400" />
+          </div>
           <input
             type="tel"
             placeholder="Teléfono *"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div className="mb-4 flex items-center">
-          <FaFacebookF className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaFacebookF className="text-gray-400" />
+          </div>
           <input
             type="text"
             placeholder="Facebook"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div className="mb-4 flex items-center">
-          <FaInstagram className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaInstagram className="text-gray-400" />
+          </div>
           <input
             type="text"
             placeholder="Instagram"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div className="mb-4 flex items-center">
-          <FaGlobe className="text-gray-400 mr-3" />
+          <div className="border border-gray-300 p-3 rounded-l-lg">
+            <FaGlobe className="text-gray-400" />
+          </div>
           <input
             type="url"
             placeholder="Sitio web"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg rounded-l-none focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300"
-        >
-          Continuar
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="rounded-full mt-4 py-2 px-6 bg-green-200 text-primary font-semibold  hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
+          >
+            Continuar
+          </button>
+        </div>
       </form>
-    </div>
-  )
-}
+    </RegisterBase>
+  );
+};
 
 export default Profile;
