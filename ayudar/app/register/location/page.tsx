@@ -2,6 +2,7 @@
 
 import React from "react";
 import RegisterBase from "@/app/components/register/RegisterBase";
+import Link from "next/link";
 
 const Location = () => {
   return (
@@ -87,12 +88,12 @@ const Location = () => {
           />
         </div>
         <div className="flex justify-end">
-          <button
-            type="submit"
+          <Link
+            href="profile"
             className="rounded-full mt-4 py-2 px-6 bg-green-200 text-green-800 font-semibold  hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
           >
             Continuar
-          </button>
+          </Link>
         </div>
       </form>
     </RegisterBase>
