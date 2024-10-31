@@ -14,10 +14,10 @@ const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
       
-    if (email === 'admin' && password === 'admin') {
+    if (email === 'granito' && password === 'admin') {
       sessionStorage.setItem('session', email + "-" + password); // Guardar el inicio de sesión en el sessionStorage
       alert('Inicio de sesión exitoso');
-      router.push('./'); // Redirigir a la página principal
+      router.push('./pagina_comedor_perfil'); // Redirigir a la página principal
     } else {
       setError('Usuario o contraseña incorrectos');
     }

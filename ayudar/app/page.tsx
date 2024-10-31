@@ -119,7 +119,7 @@ const Home = () => {
             <div>
               <h3 className="font-bold text-black">Colecta día del niño</h3>
               <p className="text-xs text-[#919EAB]">
-                10 Julio 2022 - Comedor Granito de Arena
+                3 Agosto 2024 - Comedor Granito de Arena
               </p>
               <div className="flex items-center mt-2">
                 <img src={CheckIncompleto.src} alt="Check Incompleto" className="h-4 w-4 mr-2" />
@@ -146,7 +146,7 @@ const Home = () => {
         <div>
           <h3 className="font-bold text-black">Pasá un día con nosotros</h3>
           <p className="text-xs text-[#919EAB]">
-            10 Julio 2022 - Comedor Sonrisas
+            15 Septiembre 2024 - Comedor Sonrisas
           </p>
           <div className="flex items-center">
             <img src={CheckIncompleto.src} alt="Check Incompleto" className="h-4 w-4 mr-2" />
@@ -168,7 +168,7 @@ const Home = () => {
       <div>
         <h3 className="font-bold text-black">Juntamos fondos para renovar las mesas</h3>
         <p className="text-xs text-[#919EAB]">
-        10 Julio 2022 - Comedor Sonrisas
+        10 Agosto 2024 - Comedor Sonrisas
         </p>
         <div className="flex items-center">
           <img src={CheckCompleto.src} alt="Check Incompleto" className="h-4 w-4 mr-2" />
