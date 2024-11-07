@@ -19,6 +19,8 @@ import AlimentosPequenaIcon from './icons/AlimentosPequenaIcon.png';
 import IndumentariaPequenaIcon from './icons/IndumentariaPequenaIcon.png';
 import VoluntariadoPequenoIcon from './icons/VoluntariadoPequenoIcon.png';
 import Header from './components/Header';
+import Link from 'next/link';
+
 
 
 const Home = () => {
@@ -54,9 +56,12 @@ const Home = () => {
           <h1 className="text-4xl font-bold mb-2 text-white">Doná y hacé el cambio</h1>
           <p className="text-2xl text-gray-200 mb-4">Aprendé cómo podés ayudar</p>
           <div className="flex justify-center">
+          <Link href="/pagina_donante">
             <button>
               <img src={SaberMas.src} alt="Saber Más" className="h-10" />
             </button>
+          </Link>
+
           </div>
         </section>
       {/* Main Content */}
