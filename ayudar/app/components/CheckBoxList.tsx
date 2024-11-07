@@ -103,6 +103,22 @@ const CheckBoxList = () => {
       id: 24,
       name: "Capital Federal",
     },
+    {
+      id: 25,
+      name: "GBA Sur",
+    },
+    {
+      id: 26,
+      name: "GBA Norte",
+    },
+    {
+      id: 27,
+      name: "GBA Oeste",
+    },
+    {
+      id: 27,
+      name: "Costa atlantica",
+    },
   ];
 
   return (
