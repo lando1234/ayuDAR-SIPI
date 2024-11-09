@@ -1,9 +1,9 @@
 import ComedorModel, { IComedor } from "../db/Comedor.Model";
 import connectDB from "../db/dbConnection";
 
-export const getFullComedorProfile = async (id: number) => {
+export const getFullComedorProfile = async (id: string) => {
   await connectDB();
-  const comedor = await ComedorModel.findOne({ id });
+  const comedor = await ComedorModel.findOne({id : parseInt(id)});
 
   if (!comedor) {
     throw new Error("Comedor no encontrado");
@@ -108,5 +108,20 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
   } catch (error) {
     console.error("Error al eliminar el comedor:", error);
     throw new Error("Error al eliminar el comedor");
+  }
+};
+
+export const getComedorById = async (id: number): Promise<IComedor | null> => {
+  try {
+    // Buscar el comedor en la base de datos por ID
+    const comedor = await ComedorModel.findOne({ id });
+
+    if (!comedor) {
+      return null; // Si no se encuentra, devolver null
+    }
+
+    return comedor; // Si se encuentra, devolver el comedor
+  } catch (error : any) {
+    throw new Error(`Error al buscar el comedor: ${error.message}`);
   }
 };

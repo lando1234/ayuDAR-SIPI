@@ -23,8 +23,7 @@ const provinces = [
   "Santa Fe",
   "Santiago del Estero",
   "Tierra del Fuego",
-  "Tucumán",
-  "Capital Federal"
+  "Tucumán"
 ] as const;
 
 export type Province = typeof provinces[number];
