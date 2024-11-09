@@ -49,6 +49,64 @@ export const updateComedorProfile = async (
   if (!comedor) {
     throw new Error("Comedor no encontrado");
   }
-
   return comedor;
+};
+
+/**
+ * Busca comedores por nombre.
+ * @param nombre - El nombre o parte del nombre del comedor a buscar.
+ * @returns Una lista de comedores que coinciden con el nombre.
+ */
+export const buscarComedoresPorNombre = async (
+  nombre: string
+): Promise<IComedor[]> => {
+  await connectDB(); // Asegura la conexión a la base de datos
+  try{
+    if(nombre !== ''){
+      return await ComedorModel.find({
+        nombre: { $regex: nombre, $options: 'i' }, // Búsqueda insensible a mayúsculas
+      });
+    }
+    else{
+      return await ComedorModel.find();
+    } 
+  }
+  catch (error) {
+    throw new Error("Error al buscar los comedores");
+  }
+}
+
+// Función para crear un nuevo comedor
+export const crearComedor = async (comedorData: IComedor): Promise<IComedor> => {
+  try {
+    // Crea una nueva instancia del modelo Comedor con los datos proporcionados
+    const nuevoComedor = new ComedorModel(comedorData);
+
+    // Guardar el comedor en la base de datos
+    await nuevoComedor.save();
+
+    return nuevoComedor; // Devuelve el comedor creado
+  } catch (error : any) {
+    throw new Error(error.message || "Error al crear el comedor");
+  }
+};
+
+// Eliminar un comedor por ID
+export const eliminarComedor = async (id: string): Promise<boolean> => {
+  try {
+    // Buscar y eliminar el comedor
+    console.log(id)
+    const comedor = await ComedorModel.findOneAndDelete({ id: parseInt(id) });
+
+    // Si no se encuentra el comedor, retornar false
+    if (!comedor) {
+      return false;
+    }
+
+    // Si se elimina correctamente, retornar true
+    return true;
+  } catch (error) {
+    console.error("Error al eliminar el comedor:", error);
+    throw new Error("Error al eliminar el comedor");
+  }
 };
