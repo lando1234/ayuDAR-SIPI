@@ -4,10 +4,11 @@ import React, { useEffect, useState } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import CheckBoxList, { Province } from "@/app/components/CheckBoxList";
-import OrganizationCard, { Organization } from "../components/OrganizationCard";
+import OrganizationCard from "../components/OrganizationCard";
 import AvatarUno from "../icons/AvatarUno.png";
 import AvatarDos from "../icons/AvatarDos.png";
 import AvatarTres from "../icons/AvatarTres.png";
+import { IComedor } from "@/code/db/Comedor.Model";
 
 const data = [
   {
@@ -279,31 +280,48 @@ const data = [
 const Search = () => {
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [organizations, setOrganizations] = useState(Array<Organization>);
+  const [organizations, setOrganizations] = useState(Array<IComedor>);
   const [filteredOrganizations, setFilteredOrganizations] = useState(
-    Array<Organization>
+    Array<IComedor>
   );
-  const [selectedProvinces, setSelectedProvinces] = useState(Array<Province>);
+  const [selectedProvinces, setSelectedProvinces] = useState(Array<String>);
+
+  // Nueva función para obtener datos del backend
+  const fetchOrganizations = async () => {
+    try {
+      const response = await fetch(
+        `/api/comedor?search=${encodeURIComponent(search)}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setOrganizations(data);
+      } else {
+        console.error("Error al obtener comedores");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+  };
 
   useEffect(() => {
-    // Filtro por nombre
+    // Llama a fetchOrganizations cuando cambia la búsqueda
+    fetchOrganizations();
+  }, [search]);
+
+  useEffect(() => {
+    // Filtra las organizaciones obtenidas según el nombre y la provincia
     let result = organizations.filter((organization) =>
-      organization.name.toLowerCase().includes(search.toLowerCase())
+      organization.nombre.toLowerCase().includes(search.toLowerCase())
     );
 
-    // Filtro por provincia si hay alguna seleccionada
     if (selectedProvinces.length) {
       result = result.filter((item) =>
-        selectedProvinces.includes(item.province as Province)
+        selectedProvinces.includes(item.ubicacion.provincia)
       );
     }
 
     setFilteredOrganizations(result);
   }, [search, selectedProvinces, organizations]);
-
-  useEffect(() => {
-    setOrganizations(data);
-  }, []);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -345,9 +363,17 @@ const Search = () => {
             <span className="text-black">Resultados de tu busqueda</span>
             <section className="mt-2">
               <div className="space-y-4">
-                {filteredOrganizations.map((card, index) => (
-                  <OrganizationCard key={index} {...card} />
-                ))}
+                {filteredOrganizations.map(
+                  ({ fotoPerfil, nombre, descripcion, ubicacion }, index) => (
+                    <OrganizationCard
+                      key={index}
+                      fotoPerfil={fotoPerfil}
+                      nombre={nombre}
+                      descripcion={descripcion}
+                      ubicacion={ubicacion}
+                    />
+                  )
+                )}
               </div>
             </section>
           </div>

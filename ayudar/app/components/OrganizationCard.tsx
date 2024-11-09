@@ -1,27 +1,22 @@
 import { FC } from "react";
 import Vector from '../icons/Vector.png';
+import { IComedor } from "@/code/db/Comedor.Model";
 
-export interface Organization {
-    avatar: string;
-    name: string;
-    description: string;
-    city : string;
-    province: string;
-  }
+type OrganizationCardProps = Pick<IComedor, 'fotoPerfil' | 'nombre' | 'descripcion' | 'ubicacion'>;
 
-const OrganizationCard : FC<Organization> = ({
-  avatar,
-  name,
-  description,
-  city,
-  province
+
+const OrganizationCard : FC<OrganizationCardProps> = ({
+  fotoPerfil,
+  nombre,
+  descripcion,
+  ubicacion
 }) => {
 
     return(
       <div className="bg-white shadow rounded-lg p-4 flex items-start">
-      <img src={avatar} alt="Avatar" className="h-8 mr-3 mt-2" />
+      <img src={fotoPerfil} alt="fotoPerfil" className="h-8 mr-3 mt-2" />
       <div>
-        <h3 className="font-bold text-black">{name}</h3>
+        <h3 className="font-bold text-black">{nombre}</h3>
         <div className="flex items-center gap-2 text-sm text-gray-600">
                 <span>
                   <img 
@@ -29,10 +24,10 @@ const OrganizationCard : FC<Organization> = ({
                     className="w-full h-full object-cover"
                   />
                 </span>
-                <span>{city},{province}</span>
+                <span>{ubicacion.localidad},{ubicacion.provincia}</span>
               </div>
         <div className="mt-2">
-          <p className="text-sm text-[#1C252E]">{description}</p>
+          <p className="text-sm text-[#1C252E]">{descripcion}</p>
         </div>
       </div>
     </div>
