@@ -1,4 +1,4 @@
-import { eliminarComedor, getComedorById, getFullComedorProfile, updateComedorProfile } from "@/code/services/comedor.service";
+import { eliminarComedor, getComedorById, updateComedorProfile } from "@/code/services/comedor.service";
 import { NextRequest, NextResponse } from "next/server";
 
 // Método GET para obtener los datos de un comedor por su ID
@@ -24,11 +24,13 @@ export async function GET(request: Request, { params }: { params: { id: string }
       }
   
       return NextResponse.json(comedor, { status: 200 });
-    } catch (error : any) {
-      return NextResponse.json(
-        { message: "Error al obtener el comedor", error: error.message },
-        { status: 500 }
-      );
+    } catch (error) {
+      if(error instanceof Error){
+        return NextResponse.json(
+          { message: "Error al obtener el comedor", error: error.message },
+          { status: 500 }
+        );
+      }
     }
   }
 
@@ -76,7 +78,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       const updatedComedor = await updateComedorProfile(id, data);
   
       return NextResponse.json(updatedComedor, { status: 200 });
-    } catch (error : any) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+      if(error instanceof Error){
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
     }
   }

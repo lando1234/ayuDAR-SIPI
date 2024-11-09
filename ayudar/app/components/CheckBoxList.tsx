@@ -31,8 +31,8 @@ export type Province = typeof provinces[number];
 
 
 interface CheckBoxListProps {
-  selectedProvinces: String[];
-  setSelectedProvinces: React.Dispatch<React.SetStateAction<String[]>>;
+  selectedProvinces: string[];
+  setSelectedProvinces: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CheckBoxList: React.FC<CheckBoxListProps> = ({
