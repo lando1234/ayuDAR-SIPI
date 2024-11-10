@@ -78,6 +78,7 @@ export const buscarComedoresPorNombre = async (
 
 // Función para crear un nuevo comedor
 export const crearComedor = async (comedorData: IComedor): Promise<IComedor> => {
+  await connectDB(); // Asegura la conexión a la base de datos
   try {
     // Crea una nueva instancia del modelo Comedor con los datos proporcionados
     const nuevoComedor = new ComedorModel(comedorData);
@@ -93,6 +94,7 @@ export const crearComedor = async (comedorData: IComedor): Promise<IComedor> => 
 
 // Eliminar un comedor por ID
 export const eliminarComedor = async (id: string): Promise<boolean> => {
+  await connectDB(); // Asegura la conexión a la base de datos
   try {
     // Buscar y eliminar el comedor
     console.log(id)
@@ -112,6 +114,7 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
 };
 
 export const getComedorById = async (id: number): Promise<IComedor | null> => {
+  await connectDB(); // Asegura la conexión a la base de datos
   try {
     // Buscar el comedor en la base de datos por ID
     const comedor = await ComedorModel.findOne({ id });

@@ -24,7 +24,7 @@ const RegistrationError = () => {
             Algo salió mal...
           </h2>
           <p className="text-black text-center">
-          Por favor verifique sus datos e intentelo de nuevo.
+            Por favor verifique sus datos e intentelo de nuevo.
           </p>
           <Link href="/register/location">
             <button
@@ -46,7 +46,7 @@ const RegistrationError = () => {
             />
           </div>
           <h2 className="text-2xl font-semibold mb-4 text-black">
-            ¡Bienvenido!
+            Algo salió mal...
           </h2>
           <p className="text-black text-center">
             Por favor verifique sus datos e intentelo de nuevo.
