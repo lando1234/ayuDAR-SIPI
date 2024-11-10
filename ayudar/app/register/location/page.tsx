@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import RegisterBase from "@/app/components/register/RegisterBase";
-import Link from "next/link";
+//import Link from "next/link";
 import { FaTimes, FaEnvelope, FaFacebookF, FaGlobe, FaInstagram, FaLock, FaPhone, FaImage, FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterStepper = () => {
