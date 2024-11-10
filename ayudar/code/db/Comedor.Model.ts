@@ -1,6 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
+// Forzar eliminación del modelo si ya existe (usado solo en desarrollo)
+if (mongoose.models.Comedor) {
+  delete mongoose.models.Comedor;
+}
+
 interface Ubicacion {
   provincia: string;
   codigoPostal: string;
@@ -92,5 +97,8 @@ ComedorSchema.pre<IComedor>("save", async function (next) {
   }
   next();
 });
+
+// Verifica si el modelo ya está definido antes de crearlo
+const ComedorModel = mongoose.models.Comedor || mongoose.model<IComedor>("Comedor", ComedorSchema);
 
 export default mongoose.model<IComedor>("Comedor", ComedorSchema);
