@@ -24,7 +24,7 @@ const RegistrationError = () => {
             Algo salió mal...
           </h2>
           <p className="text-black text-center">
-            El ID ReNaCom no se encuentra en nuestra base de datos
+          Por favor verifique sus datos e intentelo de nuevo.
           </p>
           <Link href="/register/location">
             <button
@@ -49,9 +49,9 @@ const RegistrationError = () => {
             ¡Bienvenido!
           </h2>
           <p className="text-black text-center">
-            El ID ReNaCom no se encuentra en nuestra base de datos
+            Por favor verifique sus datos e intentelo de nuevo.
           </p>
-          <Link href="../../">
+          <Link href="../../register/location">
             <button
               type="submit"
               className="w-1/4 bg-[#E6FBF3] border-2 border-[#7BD4B3] text-[#7BD4B3] py-3 rounded-[20px] hover:bg-[#86E4C4] transition font-bold mt-4"

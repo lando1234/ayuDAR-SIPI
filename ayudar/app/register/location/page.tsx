@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import RegisterBase from "@/app/components/register/RegisterBase";
 import Link from "next/link";
-import { FaEnvelope, FaFacebookF, FaGlobe, FaInstagram, FaLock, FaPhone, FaImage, FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaTimes, FaEnvelope, FaFacebookF, FaGlobe, FaInstagram, FaLock, FaPhone, FaImage, FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterStepper = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -14,9 +14,10 @@ const RegisterStepper = () => {
   const [partido, setPartido] = useState("");
   const [domicilio, setDomicilio] = useState("");
   const [email, setEmail] = useState("");
-  const [repeatEmail, setRepeatEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
   const [paginaWeb, setPaginaWeb] = useState("");
@@ -30,6 +31,7 @@ const RegisterStepper = () => {
     hasUpperCase: false,
     hasNumber: false,
   });
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
 
   const validarPaso1 = () => {
     const newErrors: { [key: string]: string } = {};
@@ -50,13 +52,12 @@ const RegisterStepper = () => {
     } else if (!email.includes("@")) {
       newErrors.email = "Ingrese un email válido";
     }
-    if (!repeatEmail) {
-      newErrors.repeatEmail = "Campo obligatorio";
-    } else if (email !== repeatEmail) {
-      newErrors.repeatEmail = "Los correos electrónicos no coinciden";
-    }
     if (!telefono) newErrors.telefono = "Campo obligatorio";
-    if (!password) newErrors.password = "Campo obligatorio";
+    if (!password) {
+      newErrors.password = "Campo obligatorio";
+    } else if (password !== repeatPassword) {
+      newErrors.password = "Las contraseñas no coinciden";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -66,8 +67,6 @@ const RegisterStepper = () => {
     if (!fotoPerfil) newErrors.fotoPerfil = "Debe cargar una foto de perfil.";
     if (!descripcion) {
       newErrors.descripcion = 'Campo obligatorio';
-    } else if (descripcion.length < 10) {
-      newErrors.descripcion = 'La descripción debe tener al menos 10 caracteres.';
     }
 
     setErrors(newErrors);
@@ -109,15 +108,31 @@ const RegisterStepper = () => {
     setShowPassword(!showPassword);
   };
 
+  const toggleRepeatPasswordVisibility = () => {
+    setShowRepeatPassword(!showRepeatPassword);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      setSelectedImages((prevImages) => [...prevImages, ...filesArray]);
+    }
+  };
+
+  const handleRemoveImage = (index: number) => {
+    setSelectedImages((prevImages) =>
+      prevImages.filter((_, i) => i !== index)
+    );
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setHasSubmitted(true);
 
     if (validarPaso3()) {
-      // Aquí puedes agregar la lógica para enviar el formulario
-      console.log('Formulario completado correctamente');
+      window.location.href = '/congrats';
     } else {
-      console.log('Hay errores en el formulario');
+      window.location.href = '/error';
     }
   };
 
@@ -271,27 +286,6 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="repeatEmail">
-              Repetir Correo Electrónico *
-            </label>
-            <div className="flex items-center">
-              <div className="border border-gray-300 p-3 rounded-l-lg">
-                <FaEnvelope className="text-gray-400" />
-              </div>
-              <input
-                type="email"
-                id="repeatEmail"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                value={repeatEmail}
-                onChange={(e) => setRepeatEmail(e.target.value)}
-              />
-            </div>
-            {hasSubmitted && errors.repeatEmail && (
-              <p className="text-red-500 text-sm mt-1">{errors.repeatEmail}</p>
-            )}
-          </div>
-
-          <div>
             <label className="block text-sm font-medium mb-1" htmlFor="password">
               Contraseña *
             </label>
@@ -322,13 +316,41 @@ const RegisterStepper = () => {
               <p className={`pl-4 text-sm ${passwordValidations.minLength ? 'text-green-500' : 'text-red-500'}`}>
                 Tener un mínimo de 8 caracteres de largo
               </p>
+              <p className={`pl-4 text-sm ${passwordValidations.hasNumber ? 'text-green-500' : 'text-red-500'}`}>
+                Incluir al menos una letra mayúscula
+              </p>
               <p className={`pl-4 text-sm ${passwordValidations.hasUpperCase ? 'text-green-500' : 'text-red-500'}`}>
                 Incluir al menos un número
               </p>
-              <p className={`pl-4 text-sm ${passwordValidations.hasNumber ? 'text-green-500' : 'text-red-500'}`}>
-                Al menos un número
-              </p>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1" htmlFor="repeatPassword">
+              Repetir contraseña *
+            </label>
+            <div className="flex items-center">
+              <div className="border border-gray-300 p-3 rounded-l-lg">
+                <FaLock className="text-gray-400" />
+              </div>
+              <input
+                type={showRepeatPassword ? 'text' : 'password'}
+                id="repeatPassword"
+                className="w-full px-4 py-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                value={repeatPassword}
+                onChange={(e) => setRepeatPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={toggleRepeatPasswordVisibility}
+                className="border-t border-b border-r border-gray-300 p-3 rounded-r-lg focus:outline-none"
+              >
+                {showRepeatPassword ? <FaEyeSlash className="text-gray-400" /> : <FaEye className="text-gray-400" />}
+              </button>
+            </div>
+            {hasSubmitted && errors.repeatPassword && (
+              <p className="text-red-500 text-sm mt-1">{errors.repeatPassword}</p>
+            )}
           </div>
 
           <div>
@@ -467,6 +489,42 @@ const RegisterStepper = () => {
             )}
           </div>
 
+          <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Imágenes del comedor
+          </label>
+          <div className="relative w-full border-dashed border-2 border-gray-300 rounded-lg p-4 text-center cursor-pointer">
+            <FaImage className="mx-auto text-gray-400 mb-2" size={24} />
+            <p className="text-gray-500">Upload a file or drag and drop</p>
+            <p className="text-gray-400">PNG, JPG, JPEG up to 10MB</p>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+              onChange={handleImageChange}
+            />
+          </div>
+          <div className="mt-4 flex flex-wrap gap-4">
+            {selectedImages.map((image, index) => (
+              <div key={index} className="relative w-24 h-24">
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`Selected ${index}`}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+                <button
+                  type="button"
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                  onClick={() => handleRemoveImage(index)}
+                >
+                  <FaTimes />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
           <div className="flex justify-between">
             <button
               type="button"
@@ -477,7 +535,8 @@ const RegisterStepper = () => {
             </button>
             <button
               type="submit"
-              className="rounded-full mt-4 py-2 px-6 bg-blue-200 text-blue-800 font-semibold hover:bg-blue-300"
+              
+              className="rounded-full mt-4 py-2 px-6 bg-green-200 text-green-800 font-semibold hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
             >
               Finalizar
             </button>
