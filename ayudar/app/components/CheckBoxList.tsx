@@ -23,8 +23,7 @@ const provinces = [
   "Santa Fe",
   "Santiago del Estero",
   "Tierra del Fuego",
-  "Tucumán",
-  "Capital Federal"
+  "Tucumán"
 ] as const;
 
 export type Province = typeof provinces[number];
@@ -32,8 +31,8 @@ export type Province = typeof provinces[number];
 
 
 interface CheckBoxListProps {
-  selectedProvinces: Province[];
-  setSelectedProvinces: React.Dispatch<React.SetStateAction<Province[]>>;
+  selectedProvinces: string[];
+  setSelectedProvinces: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const CheckBoxList: React.FC<CheckBoxListProps> = ({
