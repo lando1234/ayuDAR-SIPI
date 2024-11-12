@@ -34,7 +34,6 @@ interface ContactoMensaje {
 }
 
 export interface IComedor extends Document {
-  id: number;
   email: string;
   pass: string;
   nombre: string;
@@ -75,20 +74,23 @@ const contactoMensajeSchema = new Schema<ContactoMensaje>({
   texto: { type: String, required: true },
 });
 
-const ComedorSchema = new Schema<IComedor>({
-  id: { type: Number, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  pass: { type: String, required: true },
-  nombre: { type: String, required: true },
-  renacomID: { type: Number, required: true },
-  ubicacion: { type: ubicacionSchema, required: true },
-  contacto: { type: contactoSchema, required: true },
-  fotoPerfil: { type: String, required: true },
-  descripcion: { type: String, required: true },
-  imagenes: { type: [String], required: true },
-  posts: { type: [postSchema], required: true },
-  contactos: { type: [contactoMensajeSchema], required: true },
-});
+// Esquema del modelo de Comedor
+const ComedorSchema = new Schema<IComedor>(
+  {
+    email: { type: String, required: true, unique: true },
+    pass: { type: String, required: true },
+    nombre: { type: String, required: true },
+    renacomID: { type: Number, required: true },
+    ubicacion: { type: ubicacionSchema, required: true },
+    contacto: { type: contactoSchema, required: true },
+    fotoPerfil: { type: String, required: true },
+    descripcion: { type: String, required: true },
+    imagenes: { type: [String], required: true },
+    posts: { type: [postSchema], required: true },
+    contactos: { type: [contactoMensajeSchema], required: true },
+  },
+  { timestamps: true }
+); // Agrega marcas de tiempo (createdAt, updatedAt)
 
 // Middleware para hashear la contraseña antes de guardarla
 ComedorSchema.pre<IComedor>("save", async function (next) {
@@ -98,7 +100,6 @@ ComedorSchema.pre<IComedor>("save", async function (next) {
   next();
 });
 
-// Verifica si el modelo ya está definido antes de crearlo
-const ComedorModel = mongoose.models.Comedor || mongoose.model<IComedor>("Comedor", ComedorSchema);
-
-export default mongoose.model<IComedor>("Comedor", ComedorSchema);
+// Exportar el modelo, verificando si ya existe
+export default mongoose.models.Comedor ||
+  mongoose.model<IComedor>("Comedor", ComedorSchema);
