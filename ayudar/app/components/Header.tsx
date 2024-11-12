@@ -126,7 +126,10 @@ const Header = () => {
           )}
           {/* Solo mostrar "Mi perfil" si SI está logueado */}
           {isLoggedIn && (
-            <Link href="/login" className="no-underline text-white">
+            <Link
+              href="/pagina_comedor_perfil"
+              className="no-underline text-white"
+            >
               Mi perfil
             </Link>
           )}
