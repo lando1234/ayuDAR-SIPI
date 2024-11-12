@@ -52,8 +52,8 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <Header />
+    
+      
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white shadow-lg rounded-lg p-6 w-96 text-black">
           <div className="flex justify-center mb-6">
@@ -78,7 +78,7 @@ const LoginForm = () => {
                 />
               </div>
             </div>
-          </div>
+          
           <div>
             <label htmlFor="password" className="sr-only">Contraseña</label>
             <div className="relative mb-16">
@@ -108,6 +108,7 @@ const LoginForm = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 
