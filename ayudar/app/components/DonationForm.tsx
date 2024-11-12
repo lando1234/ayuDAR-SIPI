@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import CheckBoxList from './CheckBoxList'; 
 
 const DonationForm = () => {
   const [email, setEmail] = useState('');
   const [donationTypes, setDonationTypes] = useState<string[]>([]);
-  const [zone, setZone] = useState('');
+  //const [zone, setZone] = useState('');
   const [errors, setErrors] = useState<{ email: string }>({ email: '' });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,9 +18,10 @@ const DonationForm = () => {
     );
   };
 
+  /*
   const handleZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setZone(e.target.value);
-  };
+  };*/
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,7 +35,7 @@ const DonationForm = () => {
       return;
     }
     setErrors({ email: '' });
-    console.log('Formulario enviado:', { email, donationTypes, zone });
+    console.log('Formulario enviado:', { email, donationTypes });
   };
 
   return (
@@ -72,7 +72,7 @@ const DonationForm = () => {
         Zona
       </label>
       <div className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-        <CheckBoxList />
+        {/*<CheckBoxList selectedProvinces={[]} setSelectedProvinces={}/>*/}
       </div>
     </div>
       <button
