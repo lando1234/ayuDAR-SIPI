@@ -1,7 +1,7 @@
 import { getAllPosts, createPost, updatePost, deletePost } from "@/code/services/posts.service";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const posts = await getAllPosts();
     return NextResponse.json(posts, { status: 200 });
