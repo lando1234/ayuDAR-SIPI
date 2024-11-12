@@ -11,6 +11,7 @@ import DonationSection from "../components/DonationSection";
 import CreatePostCard from "../components/CreatePostCard";
 import { FiEdit2, FiCheck, FiX } from "react-icons/fi"; // Iconos para editar y guardar/cancelar
 
+
 const ComedorPaginaInstitucional_perfil = () => {
   const [comedorData, setComedorData] = useState({
     name: "Comedor granito de arena",

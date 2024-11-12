@@ -1,29 +1,48 @@
 import { FC, useState } from 'react';
 import AvatarUno from '../icons/AvatarUno.png';
-import DonationCard from './DonationCard'; // Importamos el componente DonationCard
+import DonationCard from './DonationCard';
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { IoMdSend } from 'react-icons/io';
+import dineroPequeño from '../icons/DineroIconPequeño.png';
+import comidaPequeño from '../icons/AlimentosPequenaIcon.png';
+import voluntariadoPequeño from '../icons/VoluntariadoPequenoIcon.png';
+import ropaPequeño from '../icons/IndumentariaPequenaIcon.png';
 
 const CreatePostCard: FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [donationType, setDonationType] = useState('voluntariado'); // Nuevo estado para el tipo de donación
+  const [donationTypes, setDonationTypes] = useState<string[]>([]); // Cambiado a un array para selección múltiple
   const [isFocused, setIsFocused] = useState(false);
 
   // Estado para almacenar todas las publicaciones
-  const [posts, setPosts] = useState<Array<{ title: string; content: string; date: string; donationType: string; isCompleted: boolean }>>([]);
+  const [posts, setPosts] = useState<Array<{ title: string; content: string; date: string; donationTypes: string[]; isCompleted: boolean }>>([]);
+
+  const donationImages: { [key: string]: string } = {
+    voluntariado: voluntariadoPequeño.src,
+    fondos: dineroPequeño.src,
+    comida: comidaPequeño.src,
+    ropa: ropaPequeño.src,
+  };
+
+  const handleDonationTypeChange = (type: string) => {
+    setDonationTypes((prevTypes) =>
+      prevTypes.includes(type)
+        ? prevTypes.filter((t) => t !== type) // Quita el tipo si ya está seleccionado
+        : [...prevTypes, type] // Agrega el tipo si no está seleccionado
+    );
+  };
 
   const handlePostSubmit = () => {
-    if (title.trim() && content.trim()) {
-      const currentDate = new Date().toLocaleDateString(); // Obtener la fecha actual
+    if (title.trim() && content.trim() && donationTypes.length > 0) {
+      const currentDate = new Date().toLocaleDateString();
 
-      // Agregar la nueva publicación al array de publicaciones con estado 'Activo'
-      setPosts([...posts, { title, content, date: currentDate, donationType, isCompleted: false }]);
+      // Agregar la nueva publicación al array de publicaciones con los tipos de donación seleccionados
+      setPosts([...posts, { title, content, date: currentDate, donationTypes, isCompleted: false }]);
 
       // Limpiar los campos del formulario
       setTitle('');
       setContent('');
-      setDonationType('voluntariado'); // Reiniciar el valor del tipo de donación al valor predeterminado
+      setDonationTypes([]); // Reiniciar las selecciones de tipos de donación
     }
   };
 
@@ -52,17 +71,19 @@ const CreatePostCard: FC = () => {
           onBlur={() => setIsFocused(false)}
         />
 
-        {/* Tipo de donación */}
-        <select
-          value={donationType}
-          onChange={(e) => setDonationType(e.target.value)}
-          className="w-full border-b border-gray-300 focus:outline-none focus:border-gray-500 text-gray-700 py-2"
-        >
-          <option value="voluntariado">Voluntariado</option>
-          <option value="fondos">Fondos</option>
-          <option value="comida">Comida</option>
-          <option value="ropa">Ropa</option>
-        </select>
+        {/* Tipo de donación (selección múltiple) */}
+        <div className="flex flex-wrap gap-2">
+          {Object.keys(donationImages).map((type) => (
+            <label key={type} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={donationTypes.includes(type)}
+                onChange={() => handleDonationTypeChange(type)}
+              />
+              <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
+            </label>
+          ))}
+        </div>
 
         {/* Área de contenido */}
         <div className="border rounded-lg p-2">
@@ -99,8 +120,9 @@ const CreatePostCard: FC = () => {
             date={post.date}
             organization="Comedor Granito de Arena"
             isCompleted={post.isCompleted}
-            description={`${post.content} \nTipo de donación: ${post.donationType}`} // Añadimos el tipo de donación a la descripción
-            icons={[]} // Puedes agregar más íconos aquí
+            description={`${post.content} \nTipo de donación: ${post.donationTypes.join(', ')}`}
+            icons={post.donationTypes.map((type) => ({ src: donationImages[type], alt: type }))}
+
           />
         ))}
       </div>

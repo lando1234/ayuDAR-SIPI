@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import logoLetras from "../icons/LogoLetras.png";
-import logo from "../icons/Logo.png";
+import { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+interface HeaderProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+  logoSrc: string;
+  drawerLogoSrc: string;
+}
+
+const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Verificar si hay una sesión activa
-    const session = sessionStorage.getItem("session");
+    const session = sessionStorage.getItem('session');
     if (session) {
       setIsLoggedIn(true); // Sesión activa
     } else {
@@ -18,15 +22,18 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("session");
-    window.location.href = "../login";
+    sessionStorage.removeItem('session');
+    window.location.href = '../login';
   };
 
   return (
     <>
       {/* Barra de navegación */}
-      <header className="flex justify-between items-center p-4 mb-0 md:hidden shadow-md z-50 bg-primary text-white relative w-full">
-        <button className="p-2" onClick={() => setMenuOpen(!menuOpen)}>
+      <header className="flex justify-between items-center p-4 mb-0 md:hidden" style={{ backgroundColor: '#1E8F62', color: 'white' }}>
+        <button
+          className="p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -45,8 +52,8 @@ const Header = () => {
 
         {/* Logo para Mobile */}
         <div className="flex justify-center">
-          <Link href="/">
-            <img src={logoLetras.src} alt="AYUDAR" className="h-8" />
+          <Link href="./">
+            <img src={logoSrc} alt="AYUDAR" className="h-8" />
           </Link>
         </div>
 
@@ -56,40 +63,39 @@ const Header = () => {
 
       {/* Menu Drawer para pantallas pequeñas */}
       <div
-        className={`z-50 fixed top-0 left-0 h-full text-white transition-transform transform ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 left-0 h-full text-white transition-transform transform ${
+          menuOpen ? 'translate-x-0' : '-translate-x-full'
         } w-3/4 max-w-xs p-4 md:hidden`} // Ocultar en pantallas medianas y grandes
-        style={{ backgroundColor: "#1E8F62" }}
+        style={{ backgroundColor: '#1E8F62' }}
       >
         {menuOpen && (
           <div className="flex justify-center mb-4">
             <button onClick={() => setMenuOpen(false)}>
-              <img src={logo.src} alt="Logo" className="h-20 w-auto" />
+              <img src={drawerLogoSrc} alt="Logo" className="h-20 w-auto" />
             </button>
           </div>
         )}
         <div className="flex flex-col justify-between">
           <div className="flex flex-col space-y-4">
             <div className="border-b border-white pb-2">
-              <Link href="/search">Buscar comedores</Link>
+              <Link href="../search">Buscar comedores</Link>
             </div>
             <div className="border-b border-white pb-2">
-              <Link href="/about">Nosotros</Link>
+              <Link href="../about">Nosotros</Link>
             </div>
 
             {/* Solo mostrar "Ingresa como comedor" si NO está logueado */}
             {!isLoggedIn && (
-              <Link href="/login" className="block mb-4">
-                Ingresa como comedor
-              </Link>
+              <Link href="../login" className="block mb-4">Ingresa como comedor</Link>
             )}
             {/* Solo mostrar "Mi perfil" si SI está logueado */}
             {isLoggedIn && (
-              <Link href="/pagina_comedor_perfil" className="block mb-4">
-                Mi perfil
-              </Link>
+              <Link href="../pagina_comedor_perfil" className="block mb-4">Mi perfil</Link>
             )}
+          
           </div>
+
+
 
           {/* Solo mostrar el botón "Cerrar sesión" si está logueado */}
           {isLoggedIn && (
@@ -106,25 +112,17 @@ const Header = () => {
       </div>
 
       {/* Menu para pantallas grandes */}
-      <div
-        className="hidden md:flex items-center justify-between p-4"
-        style={{ backgroundColor: "#1E8F62", color: "white" }}
-      >
+      <div className="hidden md:flex items-center justify-between p-4" style={{ backgroundColor: '#1E8F62', color: 'white' }}>
         <div className="flex items-center space-x-8">
-          <Link href="/search" className="no-underline text-white">
-            Buscar comedores
-          </Link>
-          <Link href="/about" className="no-underline text-white">
-            Nosotros
-          </Link>
-
+          <Link href="../search" className="no-underline text-white">Buscar comedores</Link>
+          <Link href="../about" className="no-underline text-white">Nosotros</Link>
+          
           {/* Solo mostrar "Ingresa como comedor" si NO está logueado */}
           {!isLoggedIn && (
-            <Link href="/login" className="no-underline text-white">
-              Ingresa como comedor
-            </Link>
+            <Link href="../login" className="no-underline text-white">Ingresa como comedor</Link>
           )}
           {/* Solo mostrar "Mi perfil" si SI está logueado */}
+
           {isLoggedIn && (
             <Link
               href="/pagina_comedor_perfil"
@@ -136,14 +134,12 @@ const Header = () => {
 
           {/* Solo mostrar el botón "Cerrar sesión" si está logueado */}
           {isLoggedIn && (
-            <button onClick={handleLogout} className="no-underline text-white">
-              Cerrar sesión
-            </button>
+            <button onClick={handleLogout} className="no-underline text-white">Cerrar sesión</button>
           )}
         </div>
         <div className="flex items-center justify-center">
-          <Link href="/home">
-            <img src={logoLetras.src} alt="AYUDAR" className="h-8" />
+          <Link href="../">
+            <img src={logoSrc} alt="AYUDAR" className="h-8" />
           </Link>
         </div>
       </div>
