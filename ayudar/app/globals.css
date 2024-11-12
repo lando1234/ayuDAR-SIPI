@@ -27,3 +27,53 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Base progress ring styles */
+.progress-ring {
+  position: relative;
+  width: 100px; /* Adjust size as needed */
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #D1D5DB; /* Gray border for background */
+  box-sizing: border-box;
+  transform: rotate(0deg); /* Default for no progress */
+}
+
+/* Step 1: 33% filled */
+.progress-step-1::before {
+  border-top-color: #FBBF24; /* Yellow border for progress */
+}
+
+/* Step 2: 66% filled */
+.progress-step-2::before {
+  border-left-color: #FBBF24; /* Yellow border for progress */
+    border-top-color: #FBBF24; /* Yellow border for progress */
+
+}
+
+/* Step 3: 100% filled */
+.progress-step-3::before {
+  border-color: #FBBF24; /* Yellow border for progress */
+}
+
+/* Centered text inside the ring */
+.progress-text {
+  position: absolute;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+}
+

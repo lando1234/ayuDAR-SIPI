@@ -122,6 +122,7 @@ const CreatePostCard: FC = () => {
             isCompleted={post.isCompleted}
             description={`${post.content} \nTipo de donación: ${post.donationTypes.join(', ')}`}
             icons={post.donationTypes.map((type) => ({ src: donationImages[type], alt: type }))}
+
           />
         ))}
       </div>

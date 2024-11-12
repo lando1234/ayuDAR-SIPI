@@ -1,44 +1,66 @@
-"use client"
+"use client";
 import Header from "@/app/components/Header";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import logoLetras from "../icons/LogoLetras.png";
-import logo from "../icons/Logo.png";
-import OrganizationSection from "@/app/components/OrganizationSection";
 import CheckBoxList from "@/app/components/CheckBoxList";
+import OrganizationCard from "../components/OrganizationCard";
+import { IComedor } from "@/code/db/Comedor.Model";
+
 
 const Search = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  {/*  const [search, setSearch] = useState(""); SE ELIMINO EL SEARCH, NO SE USABA*/}
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [organizations, setOrganizations] = useState(Array<IComedor>);
+  const [filteredOrganizations, setFilteredOrganizations] = useState(
+    Array<IComedor>
+  );
+  const [selectedProvinces, setSelectedProvinces] = useState(Array<string>);
 
-  
+  // Nueva función para obtener datos del backend
+  const fetchOrganizations = async (search : string) => {
+    try {
+      const response = await fetch(
+        `/api/comedor?search=${encodeURIComponent(search)}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setOrganizations(data);
+      } else {
+        console.error("Error al obtener comedores");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+  };
 
+  useEffect(() => {
+    // Llama a fetchOrganizations cuando cambia la búsqueda
+    fetchOrganizations(search);
+  }, [search]);
 
-  //Despues sacar
-  const [showCards, setShowCards] = useState(false);
+  useEffect(() => {
+    // Filtra las organizaciones obtenidas según el nombre y la provincia
+    let result = organizations.filter((organization) =>
+      organization.nombre.toLowerCase().includes(search.toLowerCase())
+    );
+
+    if (selectedProvinces.length) {
+      result = result.filter((item) =>
+        selectedProvinces.includes(item.ubicacion.provincia)
+      );
+    }
+
+    setFilteredOrganizations(result);
+  }, [search, selectedProvinces, organizations]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
-    /*Despues sacar*/
-    if (event.target.value.length == 0) {
-      console.log(search)
-      setShowCards(false);
-    } else {
-      setShowCards(true);
-    }
   };
 
   return (
     <div className="relative min-h-screen bg-white">
-      <Header
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        logoSrc={logoLetras.src}
-        drawerLogoSrc={logo.src}
-      />
+      <Header />
 
       <div className="bg-white p-6">
         <div className="flex gap-3 ">
@@ -46,6 +68,7 @@ const Search = () => {
             <input
               type="text"
               placeholder="Buscar por nombre"
+              value={search}
               className="flex-grow outline-none text-gray-600 focus:text-black"
               onChange={handleSearchChange}
             />
@@ -60,18 +83,30 @@ const Search = () => {
             <span className="sr-only">Filtro de provincias</span>
           </button>
         </div>
-        
-        {!showCards ? (
+
+        {!(search.length > 0) ? (
           <div className="bg-white flex items-center justify-center flex-col h-96">
             <FaMagnifyingGlass className="text-primary" size={80} />
             <span className="text-gray-400 mt-3">Descubre comedores</span>
           </div>
         ) : (
           <div>
-            <span className="text-black">
-          Resultados de tu busqueda
-          </span>
-          <OrganizationSection />
+            <span className="text-black">Resultados de tu busqueda</span>
+            <section className="mt-2">
+              <div className="space-y-4">
+                {filteredOrganizations.map(
+                  ({ fotoPerfil, nombre, descripcion, ubicacion }, index) => (
+                    <OrganizationCard
+                      key={index}
+                      fotoPerfil={fotoPerfil}
+                      nombre={nombre}
+                      descripcion={descripcion}
+                      ubicacion={ubicacion}
+                    />
+                  )
+                )}
+              </div>
+            </section>
           </div>
         )}
       </div>
@@ -98,7 +133,10 @@ const Search = () => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <CheckBoxList></CheckBoxList>
+                  <CheckBoxList
+                    selectedProvinces={selectedProvinces}
+                    setSelectedProvinces={setSelectedProvinces}
+                  ></CheckBoxList>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

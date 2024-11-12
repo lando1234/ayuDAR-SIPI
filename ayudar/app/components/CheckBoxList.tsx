@@ -1,137 +1,75 @@
-const CheckBoxList = () => {
+import { useEffect } from "react";
 
-  interface CheckBoxItem {
-    id: number;
-    name: string;
-  }
+const provinces = [
+  "Buenos Aires",
+  "Catamarca",
+  "Chaco",
+  "Chubut",
+  "Córdoba",
+  "Corrientes",
+  "Entre Ríos",
+  "Formosa",
+  "Jujuy",
+  "La Pampa",
+  "La Rioja",
+  "Mendoza",
+  "Misiones",
+  "Neuquén",
+  "Río Negro",
+  "Salta",
+  "San Juan",
+  "San Luis",
+  "Santa Cruz",
+  "Santa Fe",
+  "Santiago del Estero",
+  "Tierra del Fuego",
+  "Tucumán"
+] as const;
+
+export type Province = typeof provinces[number];
+
+interface CheckBoxListProps {
+  selectedProvinces: string[];
+  setSelectedProvinces: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const CheckBoxList: React.FC<CheckBoxListProps> = ({
+  selectedProvinces,
+  setSelectedProvinces,
+}) => {
 
 
-  const provinces:CheckBoxItem[]  = [
-    {
-      id: 1,
-      name: "Buenos Aires",
-    },
-    {
-      id: 2,
-      name: "Catamarca",
-    },
-    {
-      id: 3,
-      name: "Chaco",
-    },
-    {
-      id: 4,
-      name: "Chubut",
-    },
-    {
-      id: 5,
-      name: "Córdoba",
-    },
-    {
-      id: 6,
-      name: "Corrientes",
-    },
-    {
-      id: 7,
-      name: "Entre Ríos",
-    },
-    {
-      id: 8,
-      name: "Formosa",
-    },
-    {
-      id: 9,
-      name: "Jujuy",
-    },
-    {
-      id: 10,
-      name: "La Pampa",
-    },
-    {
-      id: 11,
-      name: "La Rioja",
-    },
-    {
-      id: 12,
-      name: "Mendoza",
-    },
-    {
-      id: 13,
-      name: "Misiones",
-    },
-    {
-      id: 14,
-      name: "Neuquén",
-    },
-    {
-      id: 15,
-      name: "Río Negro",
-    },
-    {
-      id: 16,
-      name: "Salta",
-    },
-    {
-      id: 17,
-      name: "San Juan",
-    },
-    {
-      id: 18,
-      name: "San Luis",
-    },
-    {
-      id: 19,
-      name: "Santa Cruz",
-    },
-    {
-      id: 20,
-      name: "Santa Fe",
-    },
-    {
-      id: 21,
-      name: "Santiago del Estero",
-    },
-    {
-      id: 22,
-      name: "Tierra del Fuego",
-    },
-    {
-      id: 23,
-      name: "Tucumán",
-    },
-    {
-      id: 24,
-      name: "Capital Federal",
-    },
-    {
-      id: 25,
-      name: "GBA Sur",
-    },
-    {
-      id: 26,
-      name: "GBA Norte",
-    },
-    {
-      id: 27,
-      name: "GBA Oeste",
-    },
-    {
-      id: 27,
-      name: "Costa atlantica",
-    },
-  ];
+  const handleCheckBoxChange = (province: Province) => {
+    console.log(selectedProvinces)
+    setSelectedProvinces((prevSelected) =>
+      prevSelected.includes(province)
+        ? prevSelected.filter((p) => p !== province)
+        : [...prevSelected, province]
+    );
+  };
+
+  useEffect(() => { 
+    console.log(selectedProvinces);
+  },[selectedProvinces])
+
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
-
-      {provinces.map((item) => (
-        <div className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2" key={item.id}>
+      {provinces.map((province) => (
+        <div
+          className="flex mb-2 border-solid border-gray-100 border-t-2 border-b-2"
+          key={province}
+        >
           <input
             type="checkbox"
-            value={item.id}
+            value={province}
+            checked={selectedProvinces.includes(province)}
             className=" w-4 h-4 border-2 rounded-sm text-black mt-1"
+            onChange={() => handleCheckBoxChange(province)}
           />
-          <label className="text-black text-lg ml-1" key={item.id}>{item.name}</label>
+          <label className="text-black text-lg ml-1" key={province}>
+            {province}
+          </label>
         </div>
       ))}
     </div>

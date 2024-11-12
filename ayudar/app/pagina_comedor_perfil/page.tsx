@@ -1,35 +1,33 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import logoLetras from '../icons/LogoLetras.png';
-import logo from '../icons/Logo.png';
-import AvatarUno from '../icons/AvatarUno.png';
-import Vector from '../icons/Vector.png';
-import phone from '../icons/phone.png';
-import address from '../icons/address.png';
-import mail from '../icons/mail.png';
-import DonationSection from '../components/DonationSection';
-import CreatePostCard from '../components/CreatedPostCard';
-import { FiEdit2, FiCheck, FiX } from 'react-icons/fi'; // Iconos para editar y guardar/cancelar
+import React, { useState } from "react";
+import Header from "../components/Header";
+import AvatarUno from "../icons/AvatarUno.png";
+import Vector from "../icons/Vector.png";
+import phone from "../icons/phone.png";
+import address from "../icons/address.png";
+import mail from "../icons/mail.png";
+import DonationSection from "../components/DonationSection";
+import CreatePostCard from "../components/CreatePostCard";
+import { FiEdit2, FiCheck, FiX } from "react-icons/fi"; // Iconos para editar y guardar/cancelar
 
 
 const ComedorPaginaInstitucional_perfil = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const [comedorData, setComedorData] = useState({
-    name: 'Comedor granito de arena',
-    location: 'Luján, Buenos Aires',
-    address: 'Lima 555',
-    phone: '01123567890',
-    email: 'info@granito.com',
+    name: "Comedor granito de arena",
+    location: "Luján, Buenos Aires",
+    address: "Lima 555",
+    phone: "01123567890",
+    email: "info@granito.com",
     description:
-      'Somos una organización comunitaria dedicada a brindar asistencia alimentaria a personas en situación de vulnerabilidad. Estamos ubicados en una zona de alto riesgo social. Buscamos ofrecer una comida nutritiva y un espacio de contención a quienes más lo necesitan.',
+      "Somos una organización comunitaria dedicada a brindar asistencia alimentaria a personas en situación de vulnerabilidad. Estamos ubicados en una zona de alto riesgo social. Buscamos ofrecer una comida nutritiva y un espacio de contención a quienes más lo necesitan.",
   });
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setComedorData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -37,23 +35,22 @@ const ComedorPaginaInstitucional_perfil = () => {
   const toggleEdit = () => setIsEditing(!isEditing);
 
   const handleSave = () => {
-    console.log('Datos guardados:', comedorData);
+    console.log("Datos guardados:", comedorData);
     setIsEditing(false);
   };
 
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        logoSrc={logoLetras.src}
-        drawerLogoSrc={logo.src}
-      />
+      <Header />
       <div className="max-w-screen-lg mx-4 mt-8 p-6 bg-white rounded-lg shadow-md">
         {/* Encabezado */}
         <div className="flex items-start gap-4 mb-6">
           <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-            <img src={AvatarUno.src} alt="Avatar Uno" className="w-full h-full object-cover" />
+            <img
+              src={AvatarUno.src}
+              alt="Avatar Uno"
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -66,10 +63,15 @@ const ComedorPaginaInstitucional_perfil = () => {
                 className="border-b border-gray-300 focus:outline-none"
               />
             ) : (
-              <h1 className="text-lg font-medium text-black">{comedorData.name}</h1>
+              <h1 className="text-lg font-medium text-black">
+                {comedorData.name}
+              </h1>
             )}
 
-            <FiEdit2 className="text-gray-600 cursor-pointer" onClick={toggleEdit} />
+            <FiEdit2
+              className="text-gray-600 cursor-pointer"
+              onClick={toggleEdit}
+            />
           </div>
         </div>
 
