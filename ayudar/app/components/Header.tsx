@@ -122,10 +122,16 @@ const Header: FC<HeaderProps> = ({ menuOpen, setMenuOpen, logoSrc, drawerLogoSrc
             <Link href="../login" className="no-underline text-white">Ingresa como comedor</Link>
           )}
           {/* Solo mostrar "Mi perfil" si SI está logueado */}
-            {isLoggedIn && (
-              <Link href="../login" className="no-underline text-white">Mi perfil</Link>
-            )}
-          
+
+          {isLoggedIn && (
+            <Link
+              href="/pagina_comedor_perfil"
+              className="no-underline text-white"
+            >
+              Mi perfil
+            </Link>
+          )}
+
           {/* Solo mostrar el botón "Cerrar sesión" si está logueado */}
           {isLoggedIn && (
             <button onClick={handleLogout} className="no-underline text-white">Cerrar sesión</button>
