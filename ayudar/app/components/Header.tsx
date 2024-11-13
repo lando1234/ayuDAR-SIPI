@@ -85,7 +85,7 @@ const Header = () => {
             )}
             {/* Solo mostrar "Mi perfil" si SI está logueado */}
             {isLoggedIn && (
-              <Link href="/pagina_comedor_perfil" className="block mb-4">
+              <Link href="/profile" className="block mb-4">
                 Mi perfil
               </Link>
             )}
@@ -127,7 +127,7 @@ const Header = () => {
           {/* Solo mostrar "Mi perfil" si SI está logueado */}
           {isLoggedIn && (
             <Link
-              href="/pagina_comedor_perfil"
+              href="/profile"
               className="no-underline text-white"
             >
               Mi perfil
@@ -142,7 +142,7 @@ const Header = () => {
           )}
         </div>
         <div className="flex items-center justify-center">
-          <Link href="/home">
+          <Link href="/">
             <img src={logoLetras.src} alt="AYUDAR" className="h-8" />
           </Link>
         </div>

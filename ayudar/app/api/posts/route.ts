@@ -1,9 +1,9 @@
-import { getAllPosts, createPost, updatePost, deletePost } from "@/code/services/posts.service";
+import { getPostsWithComedorName, createPost, updatePost, deletePost, getPostsWithComedorNames } from "@/code/services/posts.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const posts = await getAllPosts();
+    const posts = await getPostsWithComedorNames();
     return NextResponse.json(posts, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {

@@ -113,11 +113,12 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
   }
 };
 
-export const getComedorById = async (id: number): Promise<IComedor | null> => {
+export const getComedorById = async (id: string): Promise<IComedor | null> => {
   await connectDB(); // Asegura la conexión a la base de datos
+  const _id = id
   try {
     // Buscar el comedor en la base de datos por ID
-    const comedor = await ComedorModel.findOne({ id });
+    const comedor = await ComedorModel.findById({ _id });
 
     if (!comedor) {
       return null; // Si no se encuentra, devolver null
@@ -128,3 +129,17 @@ export const getComedorById = async (id: number): Promise<IComedor | null> => {
     throw new Error(`Error al buscar el comedor: ${error.message}`);
   }
 };
+
+async function getPostsWithComedorName() {
+  try {
+    const result = await ComedorModel.find(
+      { posts: { $exists: true, $ne: [] } }, // Filtra solo los comedores que tienen posts
+      { nombre: 1, posts: 1 } // Proyecta solo el campo 'nombre' y 'posts'
+    ).exec();
+
+    return result;
+  } catch (error) {
+    console.error("Error al obtener los posts con el nombre del comedor:", error);
+    throw error;
+  }
+}

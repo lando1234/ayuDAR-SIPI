@@ -25,6 +25,7 @@ export interface Post {
   fecha: Date;
   contenido: string;
   estado: string;
+  titulo:string;
 }
 
 interface ContactoMensaje {
