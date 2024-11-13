@@ -3,11 +3,22 @@ import React from "react";
 import Header from "../components/Header";
 import imgRegi from "../images/fondoRegistro.png";
 import Link from "next/link";
+import logoLetras from './icons/LogoLetras.png';
+import logo from './icons/Logo.png';
+import { useState } from "react";
 
-const page = () => {
+const Page = () => {
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+        logoSrc={logoLetras.src} 
+        drawerLogoSrc={logo.src} 
+      />
       <div className="min-h-screen flex items-start justify-center bg-primary text-white p-4">
         <div className="bg-primary text-center rounded-lg p-6 max-w-sm w-full shadow-lg">
           {/* Image Section */}
@@ -51,4 +62,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import AvatarUno from "../icons/AvatarUno.png";
 import Vector from "../icons/Vector.png";
@@ -8,11 +9,19 @@ import phone from "../icons/phone.png";
 import address from "../icons/address.png";
 import mail from "../icons/mail.png";
 import DonationSection from "../components/DonationSection";
+import logoLetras from "../icons/LogoLetras.png";
+import logo from "../icons/Logo.png";
 
 const ComedorPaginaInstitucional = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header />
+      <Header 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+        logoSrc={logoLetras.src} 
+        drawerLogoSrc={logo.src} 
+      />
       <div className="max-w-screen-lg mx-4 mt-8 p-6 bg-white rounded-lg shadow-md">
         {/* Sección de encabezado */}
         <div className="flex items-start gap-4 mb-6">
