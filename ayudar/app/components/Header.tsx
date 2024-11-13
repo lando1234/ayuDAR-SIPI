@@ -142,7 +142,7 @@ const Header = () => {
           )}
         </div>
         <div className="flex items-center justify-center">
-          <Link href="/home">
+          <Link href="/">
             <img src={logoLetras.src} alt="AYUDAR" className="h-8" />
           </Link>
         </div>
