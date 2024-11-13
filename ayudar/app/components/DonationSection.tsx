@@ -1,7 +1,7 @@
 // components/DonationSection.tsx
 import { FC } from 'react';
 import DonationCard from './DonationCard';
-import { IComedor, Post } from '@/code/db/Comedor.Model';
+import {Post } from '@/code/db/Comedor.Model';
 
 export interface DonationCardData {
   avatar: string;

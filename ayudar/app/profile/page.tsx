@@ -195,9 +195,10 @@ const MyProfile = () => {
         )}
 
         <hr className="my-6 border-gray-200" />
-
+        
         {/* Nueva publicación */}
-        <CreatePostCard />
+        {comedorData? 
+        <CreatePostCard comedorData={comedorData} setComedorData={setComedorData}/> : null}
 
         {/* Sección de Actividad */}
         <div className="space-y-2 mt-4">

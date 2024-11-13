@@ -27,13 +27,13 @@ export const getComedorProfile = async (
 };
 
 export const updateComedorProfile = async (
-  id: number,
+  id: string,
   data: Partial<IComedor>
 ) => {
   await connectDB();
 
   const comedor = await ComedorModel.findOneAndUpdate(
-    { id },
+    { _id : id },
     {
       nombre: data.nombre,
       renacomID: data.renacomID,
@@ -130,16 +130,3 @@ export const getComedorById = async (id: string): Promise<IComedor | null> => {
   }
 };
 
-async function getPostsWithComedorName() {
-  try {
-    const result = await ComedorModel.find(
-      { posts: { $exists: true, $ne: [] } }, // Filtra solo los comedores que tienen posts
-      { nombre: 1, posts: 1 } // Proyecta solo el campo 'nombre' y 'posts'
-    ).exec();
-
-    return result;
-  } catch (error) {
-    console.error("Error al obtener los posts con el nombre del comedor:", error);
-    throw error;
-  }
-}

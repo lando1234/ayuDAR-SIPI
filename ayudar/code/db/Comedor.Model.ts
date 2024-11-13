@@ -25,7 +25,7 @@ export interface Post {
   fecha: Date;
   contenido: string;
   estado: string;
-  titulo:string;
+  titulo: string;
 }
 
 interface ContactoMensaje {
@@ -67,6 +67,7 @@ const postSchema = new Schema<Post>({
   fecha: { type: Date, required: true },
   contenido: { type: String, required: true },
   estado: { type: String, required: true },
+  titulo: { type: String },
 });
 
 const contactoMensajeSchema = new Schema<ContactoMensaje>({

@@ -17,6 +17,7 @@ export interface DonationCardProps {
   };
 }
 
+
 // Mapea los tipos a las imágenes, permitiendo cualquier cadena como clave
 const imageMap: { [key: string]: StaticImageData } = {
   Alimentos: AlimentosImage,

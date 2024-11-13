@@ -7,23 +7,45 @@ export const getAllPosts = async () => {
   return comedores.flatMap((comedor) => comedor.posts);
 };
 
-export const createPost = async (
-  id: number,
-  post: Post
-): Promise<IComedor | null> => {
-  await connectDB();
 
-  const comedor = await ComedorModel.findOneAndUpdate(
-    { id },
-    { $push: { posts: post } },
-    { new: true } // Devuelve el documento actualizado
-  );
+// Servicio para crear un post
+export const createPost = async (comedorId: string, postData: Post): Promise<IComedor> => {
+  try {
+    // Buscar el comedor por su ID
+    const comedor = await ComedorModel.findById(comedorId);
 
-  if (!comedor) {
-    throw new Error("Comedor no encontrado");
+    // Verifica si el comedor existe
+    if (!comedor) {
+      const errorMessage = `Comedor con ID ${comedorId} no encontrado`;
+      console.error(errorMessage);
+      throw new Error(errorMessage); // Lanza un error con un mensaje más detallado
+    }
+
+    // Verifica si los datos del post son válidos
+    if (!postData || !postData.titulo || !postData.contenido) {
+      const errorMessage = 'Datos del post incompletos o inválidos';
+      console.error(errorMessage);
+      throw new Error(errorMessage); // Lanza un error si los datos no son válidos
+    }
+
+    // Agregar el post al array de posts del comedor
+    comedor.posts.push(postData);
+
+    console.log(JSON.stringify(postData));
+    // Guardar el comedor con el nuevo post
+    await comedor.save();
+
+    return comedor; // Retorna el comedor actualizado
+  } catch (error) {
+    // Manejo detallado del error
+    if (error instanceof Error) {
+      console.error("Error al crear el post:", error.message, error.stack); // Log más detallado
+      throw new Error(`Error al crear el post: ${error.message}`);
+    } else {
+      console.error("Error desconocido:", error);
+      throw new Error("Error desconocido al crear el post");
+    }
   }
-
-  return comedor;
 };
 
 export const updatePost = async (

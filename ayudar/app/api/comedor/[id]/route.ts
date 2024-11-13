@@ -66,8 +66,8 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     try {
-      const id = parseInt(params.id, 10); // Convierte el id de string a número
-      if (isNaN(id)) {
+      const id = params.id// Convierte el id de string a número
+      if (!id) {
         return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
       }
   
