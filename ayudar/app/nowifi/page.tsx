@@ -1,20 +1,11 @@
 "use client";
 import Header from "../components/Header";
 import noConnection from "../images/noConnection.png";
-import { useState } from "react";
-import logoLetras from "../icons/LogoLetras.png";
-import logo from "../icons/Logo.png";
 
 const About = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header 
-        menuOpen={menuOpen} 
-        setMenuOpen={setMenuOpen} 
-        logoSrc={logoLetras.src} 
-        drawerLogoSrc={logo.src} 
-      />
+      <Header />
 
       {/* Main Content */}
       <main className="p-4">
