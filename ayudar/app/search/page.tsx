@@ -6,14 +6,9 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import CheckBoxList from "@/app/components/CheckBoxList";
 import OrganizationCard from "../components/OrganizationCard";
 import { IComedor } from "@/code/db/Comedor.Model";
-import logoLetras from "../icons/LogoLetras.png";
-import logo from "../icons/Logo.png";
 
 
 const Search = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  {/*  const [search, setSearch] = useState(""); SE ELIMINO EL SEARCH, NO SE USABA*/}
-
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [organizations, setOrganizations] = useState(Array<IComedor>);
@@ -65,12 +60,7 @@ const Search = () => {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <Header 
-        menuOpen={menuOpen} 
-        setMenuOpen={setMenuOpen} 
-        logoSrc={logoLetras.src} 
-        drawerLogoSrc={logo.src} 
-      />
+      <Header />
 
       <div className="bg-white p-6">
         <div className="flex gap-3 ">

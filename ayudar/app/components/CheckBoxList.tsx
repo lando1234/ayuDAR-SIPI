@@ -28,6 +28,8 @@ const provinces = [
 
 export type Province = typeof provinces[number];
 
+
+
 interface CheckBoxListProps {
   selectedProvinces: string[];
   setSelectedProvinces: React.Dispatch<React.SetStateAction<string[]>>;
@@ -51,7 +53,6 @@ const CheckBoxList: React.FC<CheckBoxListProps> = ({
   useEffect(() => { 
     console.log(selectedProvinces);
   },[selectedProvinces])
-
 
   return (
     <div className="flex flex-col overflow-y-auto max-h-56">
