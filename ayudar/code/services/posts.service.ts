@@ -121,7 +121,7 @@ export const getPostsWithComedorNames = async () => {
           _id: 0, // omite el _id del comedor
           post: "$posts", // asigna el contenido de posts al campo "post"
           comedor: { // agrega un nuevo campo llamado "comedor" con nombre y fotoPerfil
-            nombreComedor: "$nombre",
+            nombre: "$nombre",
             fotoPerfil: "$fotoPerfil"
           }
         }
