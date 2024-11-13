@@ -4,20 +4,11 @@ import React from "react";
 import Header from "../../components/Header";
 import congrats from "../../images/congratsRegister.png";
 import Link from "next/link";
-import logoLetras from './icons/LogoLetras.png';
-import logo from './icons/Logo.png';
-import { useState } from "react";
 
 const Congrats = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header 
-        menuOpen={menuOpen} 
-        setMenuOpen={setMenuOpen} 
-        logoSrc={logoLetras.src} 
-        drawerLogoSrc={logo.src} 
-      />
+      <Header />
 
       <main className="p-4 bg-white rounded-[15px] mt-20 mr-4 ml-5">
         {/* Sección para pantallas pequeñas */}
