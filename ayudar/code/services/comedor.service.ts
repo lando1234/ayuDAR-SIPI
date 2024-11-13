@@ -98,7 +98,7 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
   try {
     // Buscar y eliminar el comedor
     console.log(id)
-    const comedor = await ComedorModel.findOneAndDelete({ id: parseInt(id) });
+    const comedor = await ComedorModel.findOneAndDelete({ _id: id });
 
     // Si no se encuentra el comedor, retornar false
     if (!comedor) {

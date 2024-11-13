@@ -109,7 +109,7 @@ const MyProfile = () => {
                 className="border-b border-gray-300 focus:outline-none"
               />
             ) : (
-              <span>{comedorData?.ubicacion.provincia}</span>
+              <span>{comedorData?.ubicacion.provincia}, {comedorData?.ubicacion.localidad}</span>
             )}
           </div>
 

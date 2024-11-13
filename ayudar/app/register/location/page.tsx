@@ -3,7 +3,20 @@
 import React, { useState } from "react";
 import RegisterBase from "@/app/components/register/RegisterBase";
 //import Link from "next/link";
-import { FaTimes, FaEnvelope, FaFacebookF, FaGlobe, FaInstagram, FaLock, FaPhone, FaImage, FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaTimes,
+  FaEnvelope,
+  FaFacebookF,
+  FaGlobe,
+  FaInstagram,
+  FaLock,
+  FaPhone,
+  FaImage,
+  FaPlus,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
+import { provinces } from "@/app/components/CheckBoxList";
 
 const RegisterStepper = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -70,7 +83,7 @@ const RegisterStepper = () => {
     const newErrors: { [key: string]: string } = {};
     if (!fotoPerfil) newErrors.fotoPerfil = "Debe cargar una foto de perfil.";
     if (!descripcion) {
-      newErrors.descripcion = 'Campo obligatorio';
+      newErrors.descripcion = "Campo obligatorio";
     }
 
     setErrors(newErrors);
@@ -138,9 +151,7 @@ const RegisterStepper = () => {
   };
 
   const handleRemoveImage = (index: number) => {
-    setSelectedImages((prevImages) =>
-      prevImages.filter((_, i) => i !== index)
-    );
+    setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
   const crearComedor = async () => {
@@ -180,10 +191,10 @@ const RegisterStepper = () => {
 
       if (response.ok) {
         console.log("Comedor creado exitosamente");
-        window.location.href = 'congrats';
+        window.location.href = "congrats";
       } else {
         console.error("Error al crear comedor");
-        window.location.href = 'error';
+        window.location.href = "error";
       }
     } catch (error) {
       console.error("Error de red al crear comedor:", error);
@@ -219,8 +230,8 @@ const RegisterStepper = () => {
         currentStep === 1
           ? "Información general"
           : currentStep === 2
-            ? "Datos del perfil"
-            : "Personaliza tu perfil"
+          ? "Datos del perfil"
+          : "Personaliza tu perfil"
       }
     >
       {currentStep === 1 && (
@@ -242,7 +253,10 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="idRenacom">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="idRenacom"
+            >
               ID ReNaCom *
             </label>
             <input
@@ -258,9 +272,13 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="provincia">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="provincia"
+            >
               Provincia *
             </label>
+
             <select
               id="provincia"
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -268,9 +286,11 @@ const RegisterStepper = () => {
               onChange={(e) => setProvincia(e.target.value)}
             >
               <option value="">Seleccione una provincia</option>
-              <option value="Buenos Aires">Buenos Aires</option>
-              <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
-              <option value="Córdoba">Córdoba</option>
+              {provinces.map((provincia) => (
+                <option key={provincia} value={provincia}>
+                  {provincia}
+                </option>
+              ))}
             </select>
             {hasSubmitted && errors.provincia && (
               <p className="text-red-500 text-sm mt-1">{errors.provincia}</p>
@@ -278,7 +298,10 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="codPostal">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="codPostal"
+            >
               Código Postal *
             </label>
             <input
@@ -310,7 +333,10 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="domicilio">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="domicilio"
+            >
               Domicilio *
             </label>
             <input
@@ -361,7 +387,10 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="password">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="password"
+            >
               Contraseña *
             </label>
             <div className="flex items-center">
@@ -369,7 +398,7 @@ const RegisterStepper = () => {
                 <FaLock className="text-gray-400" />
               </div>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 id="password"
                 className="w-full px-4 py-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={password}
@@ -380,7 +409,11 @@ const RegisterStepper = () => {
                 onClick={togglePasswordVisibility}
                 className="border-t border-b border-r border-gray-300 p-3 rounded-r-lg focus:outline-none"
               >
-                {showPassword ? <FaEyeSlash className="text-gray-400" /> : <FaEye className="text-gray-400" />}
+                {showPassword ? (
+                  <FaEyeSlash className="text-gray-400" />
+                ) : (
+                  <FaEye className="text-gray-400" />
+                )}
               </button>
             </div>
             {hasSubmitted && errors.password && (
@@ -388,21 +421,48 @@ const RegisterStepper = () => {
             )}
             {password && (
               <div>
-                <p className={`text-sm ${passwordValidations.minLength ? 'text-green-500' : 'text-red-500'}`}>
-                  {passwordValidations.minLength ? '✓ Mínimo de 8 caracteres' : 'La contraseña debe tener al menos 8 caracteres'}
+                <p
+                  className={`text-sm ${
+                    passwordValidations.minLength
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {passwordValidations.minLength
+                    ? "✓ Mínimo de 8 caracteres"
+                    : "La contraseña debe tener al menos 8 caracteres"}
                 </p>
-                <p className={`text-sm ${passwordValidations.hasUpperCase ? 'text-green-500' : 'text-red-500'}`}>
-                  {passwordValidations.hasUpperCase ? '✓ Debe contener al menos una mayúscula' : 'Debe contener al menos una mayúscula'}
+                <p
+                  className={`text-sm ${
+                    passwordValidations.hasUpperCase
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {passwordValidations.hasUpperCase
+                    ? "✓ Debe contener al menos una mayúscula"
+                    : "Debe contener al menos una mayúscula"}
                 </p>
-                <p className={`text-sm ${passwordValidations.hasNumber ? 'text-green-500' : 'text-red-500'}`}>
-                  {passwordValidations.hasNumber ? '✓ Debe contener al menos un número' : 'Debe contener al menos un número'}
+                <p
+                  className={`text-sm ${
+                    passwordValidations.hasNumber
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {passwordValidations.hasNumber
+                    ? "✓ Debe contener al menos un número"
+                    : "Debe contener al menos un número"}
                 </p>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="repeatPassword">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="repeatPassword"
+            >
               Repetir contraseña *
             </label>
             <div className="flex items-center">
@@ -410,7 +470,7 @@ const RegisterStepper = () => {
                 <FaLock className="text-gray-400" />
               </div>
               <input
-                type={showRepeatPassword ? 'text' : 'password'}
+                type={showRepeatPassword ? "text" : "password"}
                 id="repeatPassword"
                 className="w-full px-4 py-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={repeatPassword}
@@ -421,16 +481,25 @@ const RegisterStepper = () => {
                 onClick={toggleRepeatPasswordVisibility}
                 className="border-t border-b border-r border-gray-300 p-3 rounded-r-lg focus:outline-none"
               >
-                {showRepeatPassword ? <FaEyeSlash className="text-gray-400" /> : <FaEye className="text-gray-400" />}
+                {showRepeatPassword ? (
+                  <FaEyeSlash className="text-gray-400" />
+                ) : (
+                  <FaEye className="text-gray-400" />
+                )}
               </button>
             </div>
             {hasSubmitted && errors.repeatPassword && (
-              <p className="text-red-500 text-sm mt-1">{errors.repeatPassword}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.repeatPassword}
+              </p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="telefono">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="telefono"
+            >
               Teléfono *
             </label>
             <div className="flex items-center">
@@ -443,14 +512,18 @@ const RegisterStepper = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
-              /></div>
+              />
+            </div>
             {hasSubmitted && errors.telefono && (
               <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="facebook">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="facebook"
+            >
               Facebook
             </label>
             <div className="flex items-center">
@@ -463,11 +536,15 @@ const RegisterStepper = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={facebook}
                 onChange={(e) => setFacebook(e.target.value)}
-              /></div>
+              />
+            </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="instagram">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="instagram"
+            >
               Instagram
             </label>
             <div className="flex items-center">
@@ -480,11 +557,15 @@ const RegisterStepper = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={instagram}
                 onChange={(e) => setInstagram(e.target.value)}
-              /></div>
+              />
+            </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="paginaWeb">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="paginaWeb"
+            >
               Página Web
             </label>
             <div className="flex items-center">
@@ -497,7 +578,8 @@ const RegisterStepper = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={paginaWeb}
                 onChange={(e) => setPaginaWeb(e.target.value)}
-              /></div>
+              />
+            </div>
           </div>
 
           <div className="flex justify-between">
@@ -520,9 +602,15 @@ const RegisterStepper = () => {
       )}
 
       {currentStep === 3 && (
-        <form onSubmit={handleSubmit} className="min-h-screen rounded-3xl bg-white p-6 rounded-b-lg w-full max-w-md text-gray-400 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="min-h-screen rounded-3xl bg-white p-6 rounded-b-lg w-full max-w-md text-gray-400 space-y-4"
+        >
           <div className="mb-6 text-center">
-            <label className="block text-sm font-medium mb-1" htmlFor="fotoPerfil">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="fotoPerfil"
+            >
               Foto de perfil *
             </label>
             <div className="relative w-24 h-24 mx-auto rounded-full border border-gray-300 bg-gray-100 flex items-center justify-center">
@@ -549,7 +637,10 @@ const RegisterStepper = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="descripcion">
+            <label
+              className="block text-sm font-medium mb-1"
+              htmlFor="descripcion"
+            >
               Descripción del comedor *
             </label>
             <textarea
@@ -618,7 +709,6 @@ const RegisterStepper = () => {
             </button>
             <button
               type="submit"
-
               className="rounded-full mt-4 py-2 px-6 bg-green-200 text-green-800 font-semibold hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 border border-primary"
             >
               Finalizar
