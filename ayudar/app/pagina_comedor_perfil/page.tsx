@@ -9,10 +9,12 @@ import address from "../icons/address.png";
 import mail from "../icons/mail.png";
 import DonationSection from "../components/DonationSection";
 import CreatePostCard from "../components/CreatePostCard";
+import logoLetras from "../icons/LogoLetras.png";
+import logo from "../icons/Logo.png";
 import { FiEdit2, FiCheck, FiX } from "react-icons/fi"; // Iconos para editar y guardar/cancelar
 
-
 const ComedorPaginaInstitucional_perfil = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [comedorData, setComedorData] = useState({
     name: "Comedor granito de arena",
     location: "Luján, Buenos Aires",
@@ -41,7 +43,12 @@ const ComedorPaginaInstitucional_perfil = () => {
 
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header />
+      <Header 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+        logoSrc={logoLetras.src} 
+        drawerLogoSrc={logo.src} 
+      />
       <div className="max-w-screen-lg mx-4 mt-8 p-6 bg-white rounded-lg shadow-md">
         {/* Encabezado */}
         <div className="flex items-start gap-4 mb-6">

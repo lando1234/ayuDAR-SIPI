@@ -3,11 +3,20 @@
 import React from "react";
 import Header from "../../components/Header";
 import loading from "../../images/loadingRegister.png";
+import logoLetras from './icons/LogoLetras.png';
+import logo from './icons/Logo.png';
+import { useState } from "react";
 
 const Congrats = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Header />
+      <Header 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+        logoSrc={logoLetras.src} 
+        drawerLogoSrc={logo.src} 
+      />
 
       <main className="p-4 bg-white rounded-[15px] mt-20 mr-4 ml-5">
         {/* Sección para pantallas pequeñas */}
