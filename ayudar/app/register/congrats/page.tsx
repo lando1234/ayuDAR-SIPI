@@ -51,7 +51,7 @@ const Congrats = () => {
           <p className="text-black text-center">
             Estamos muy felices de que seas parte.
           </p>
-          <Link href="/">
+          <Link href="/pagina_comedor_perfil">
             <button
               type="submit"
               className="w-1/4 bg-[#E6FBF3] border-2 border-[#7BD4B3] text-[#7BD4B3] py-3 rounded-[20px] hover:bg-[#86E4C4] transition font-bold mt-4"
