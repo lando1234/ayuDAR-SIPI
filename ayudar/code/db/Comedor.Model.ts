@@ -34,6 +34,7 @@ interface ContactoMensaje {
 }
 
 export interface IComedor extends Document {
+  id: number,
   email: string;
   pass: string;
   nombre: string;
@@ -77,6 +78,7 @@ const contactoMensajeSchema = new Schema<ContactoMensaje>({
 // Esquema del modelo de Comedor
 const ComedorSchema = new Schema<IComedor>(
   {
+    id: { type: Number, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     pass: { type: String, required: true },
     nombre: { type: String, required: true },
