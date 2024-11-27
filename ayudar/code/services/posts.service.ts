@@ -11,6 +11,7 @@ export const getAllPosts = async () => {
 // Servicio para crear un post
 export const createPost = async (comedorId: string, postData: Post): Promise<IComedor> => {
   try {
+    await connectDB();
     // Buscar el comedor por su ID
     const comedor = await ComedorModel.findById(comedorId);
 
@@ -94,6 +95,7 @@ export const deletePost = async (id: number, fecha: Date) => {
 
 export async function getPostsWithComedorName() {
   try {
+    await connectDB();
     const result = await ComedorModel.find(
       { posts: { $exists: true, $ne: [] } }, // Filtra solo los comedores que tienen posts
       { nombre: 1, posts: 1 } // Proyecta solo el campo 'nombre' y 'posts'
@@ -108,6 +110,7 @@ export async function getPostsWithComedorName() {
 
 export const getPostsWithComedorNames = async () => {
   try {
+    await connectDB();
     const result = await ComedorModel.aggregate([
       // Filtra solo los comedores que tienen posts
       { $match: { posts: { $exists: true, $ne: [] } } },
