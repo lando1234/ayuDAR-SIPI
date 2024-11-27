@@ -15,6 +15,7 @@ export interface DonationCardProps {
     nombre: string;
     fotoPerfil: string;
   };
+  showButton: boolean
 }
 
 // Enum para los estados del post
@@ -31,7 +32,7 @@ const imageMap: Record<string, StaticImageData> = {
   Voluntariado: VoluntariadoImage,
 };
 
-const DonationCard: FC<DonationCardProps> = ({ post, comedor }) => {
+const DonationCard: FC<DonationCardProps> = ({ post, comedor,showButton = false }) => {
   // Manejar el estado del post localmente
   const [postState, setPostState] = useState<Post>(post);
   // Maneja la acción de completar el post
@@ -110,7 +111,7 @@ const DonationCard: FC<DonationCardProps> = ({ post, comedor }) => {
         </div>
 
           {
-          postState.estado === PostEstado.Activo?(
+          showButton && postState.estado === PostEstado.Activo?(
             <div className="flex items-center mt-2">
 
           <button

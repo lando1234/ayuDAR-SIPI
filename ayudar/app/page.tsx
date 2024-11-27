@@ -200,7 +200,7 @@ const Home = () => {
         {/* Renderizando directamente DonationCard */}
         <div className="space-y-4">
           {posts.map((post, index) => (
-            <DonationCard key={index} post={post.post} comedor={post.comedor} />
+            <DonationCard key={index} post={post.post} comedor={post.comedor} showButton={false}/>
           ))}
         </div>
       </main>
