@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const provinces = [
+export const provinces = [
   "Buenos Aires",
   "Catamarca",
   "Chaco",

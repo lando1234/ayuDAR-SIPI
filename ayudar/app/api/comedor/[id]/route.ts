@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 // Método GET para obtener los datos de un comedor por su ID
 export async function GET(request: Request, { params }: { params: { id: string } }) {
     try {
-      const id = Number(params.id); // Convertir el ID de la URL a número
   
-      if (isNaN(id)) {
+  
+      if (!params.id) {
         return NextResponse.json(
           { message: "El ID proporcionado no es válido." },
           { status: 400 }
@@ -14,7 +14,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
       }
   
       // Llamar al servicio para obtener el comedor con el ID
-      const comedor = await getComedorById(id);
+      const comedor = await getComedorById(params.id);
   
       if (!comedor) {
         return NextResponse.json(
@@ -66,8 +66,8 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
 export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     try {
-      const id = parseInt(params.id, 10); // Convierte el id de string a número
-      if (isNaN(id)) {
+      const id = params.id// Convierte el id de string a número
+      if (!id) {
         return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
       }
   

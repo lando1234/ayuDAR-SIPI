@@ -27,13 +27,13 @@ export const getComedorProfile = async (
 };
 
 export const updateComedorProfile = async (
-  id: number,
+  id: string,
   data: Partial<IComedor>
 ) => {
   await connectDB();
 
   const comedor = await ComedorModel.findOneAndUpdate(
-    { id },
+    { _id : id },
     {
       nombre: data.nombre,
       renacomID: data.renacomID,
@@ -98,7 +98,7 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
   try {
     // Buscar y eliminar el comedor
     console.log(id)
-    const comedor = await ComedorModel.findOneAndDelete({ id: parseInt(id) });
+    const comedor = await ComedorModel.findOneAndDelete({ _id: id });
 
     // Si no se encuentra el comedor, retornar false
     if (!comedor) {
@@ -113,11 +113,12 @@ export const eliminarComedor = async (id: string): Promise<boolean> => {
   }
 };
 
-export const getComedorById = async (id: number): Promise<IComedor | null> => {
+export const getComedorById = async (id: string): Promise<IComedor | null> => {
   await connectDB(); // Asegura la conexión a la base de datos
+  const _id = id
   try {
     // Buscar el comedor en la base de datos por ID
-    const comedor = await ComedorModel.findOne({ id });
+    const comedor = await ComedorModel.findById({ _id });
 
     if (!comedor) {
       return null; // Si no se encuentra, devolver null
@@ -128,3 +129,4 @@ export const getComedorById = async (id: number): Promise<IComedor | null> => {
     throw new Error(`Error al buscar el comedor: ${error.message}`);
   }
 };
+

@@ -1,15 +1,47 @@
 "use client";
-
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { IComedor, Post } from "@/code/db/Comedor.Model";
 import React from "react";
-import Header from "../components/Header";
-import AvatarUno from "../icons/AvatarUno.png";
-import Vector from "../icons/Vector.png";
-import phone from "../icons/phone.png";
-import address from "../icons/address.png";
-import mail from "../icons/mail.png";
-import DonationSection from "../components/DonationSection";
+import Vector from "../../icons/Vector.png";
+import phone from "../../icons/phone.png";
+import address from "../../icons/address.png";
+import mail from "../../icons/mail.png";
+import Header from "@/app/components/Header";
+import DonationSection from "@/app/components/DonationSection";
 
-const ComedorPaginaInstitucional = () => {
+const ComedorPaginaInstitucional_perfil = () => {
+  const { id } = useParams();
+
+  const [comedorData, setComedorData] = useState<IComedor>();
+
+  useEffect(() => {
+    const fetchComedorData = async () => {
+      if (!id) return; // Asegura que el id esté disponible
+      try {
+        const response = await fetch(`/api/comedor/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          // Ordenamos los posts por fecha (de más reciente a más antiguo)
+          const sortedPosts = data.posts.sort((a: Post, b: Post) => {
+            return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+          });
+
+          // Actualizamos el estado con los datos ordenados
+          setComedorData({ ...data, posts: sortedPosts });
+        } else {
+          console.error("Error al obtener los datos del comedor");
+        }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+      }
+    };
+
+    fetchComedorData();
+  }, [id]);
+
+  if (!comedorData) return <div>Cargando...{id}</div>;
+
   return (
     <div className="relative min-h-screen bg-gray-100">
       <Header />
@@ -18,7 +50,7 @@ const ComedorPaginaInstitucional = () => {
         <div className="flex items-start gap-4 mb-6">
           <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
             <img
-              src={AvatarUno.src}
+              src={comedorData.fotoPerfil}
               alt="Avatar Uno"
               className="w-full h-full object-cover"
             />
@@ -26,7 +58,7 @@ const ComedorPaginaInstitucional = () => {
 
           <div className="flex flex-col gap-2">
             <h1 className="text-lg font-medium text-black">
-              Comedor granito de arena
+              {comedorData.nombre}
             </h1>
 
             {/* Información de contacto */}
@@ -39,7 +71,10 @@ const ComedorPaginaInstitucional = () => {
                     className="w-full h-full object-cover"
                   />
                 </span>
-                <span>Luján, Buenos Aires</span>
+                <span>
+                  {comedorData.ubicacion.localidad},{" "}
+                  {comedorData.ubicacion.provincia}
+                </span>
               </div>
 
               <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -50,7 +85,7 @@ const ComedorPaginaInstitucional = () => {
                     className="w-full h-full object-cover"
                   />
                 </span>
-                <span>Lima 555</span>
+                <span>{comedorData.ubicacion.domicilio}</span>
               </div>
 
               <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -61,7 +96,7 @@ const ComedorPaginaInstitucional = () => {
                     className="w-full h-full object-cover"
                   />
                 </span>
-                <span>01123567890</span>
+                <span>{comedorData.contacto.tel}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <span>
@@ -71,20 +106,14 @@ const ComedorPaginaInstitucional = () => {
                     className="w-full h-full object-cover"
                   />
                 </span>
-                <span>info@granito.com</span>
+                <span>{comedorData.email}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Descripción */}
-        <p className="text-sm text-gray-600 mb-6">
-          Somos una organización comunitaria dedicada a brindar asistencia
-          alimentaria a personas en situación de vulnerabilidad. Estamos
-          ubicados en una zona de alto riesgo social. Buscamos ofrecer una
-          comida nutritiva y un espacio de contención a quienes más lo
-          necesitan.
-        </p>
+        <p className="text-sm text-gray-600 mb-6">{comedorData.descripcion}</p>
 
         <hr className="my-6 border-gray-200" />
 
@@ -92,7 +121,7 @@ const ComedorPaginaInstitucional = () => {
         <div className="space-y-2">
           <h2 className="text-lg text-gray-500">Actividad</h2>
           <div className="rounded-lg ">
-            <DonationSection />
+            <DonationSection posts={comedorData.posts} comedor={comedorData} />
           </div>
         </div>
       </div>
@@ -100,4 +129,4 @@ const ComedorPaginaInstitucional = () => {
   );
 };
 
-export default ComedorPaginaInstitucional;
+export default ComedorPaginaInstitucional_perfil;

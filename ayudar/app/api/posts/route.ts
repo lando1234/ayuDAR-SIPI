@@ -1,9 +1,9 @@
-import { getAllPosts, createPost, updatePost, deletePost } from "@/code/services/posts.service";
+import { updatePost, deletePost, getPostsWithComedorNames } from "@/code/services/posts.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const posts = await getAllPosts();
+    const posts = await getPostsWithComedorNames();
     return NextResponse.json(posts, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {
@@ -12,17 +12,6 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const { id, post } = await req.json();
-    const comedorActualizado = await createPost(id, post);
-    return NextResponse.json(comedorActualizado, { status: 201 });
-  } catch (error) {
-    if (error instanceof Error) {
-      return NextResponse.json({ message: error.message || "Error al crear el post" }, { status: 400 });
-    }
-  }
-}
 
 export async function PUT(req: NextRequest) {
   try {

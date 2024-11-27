@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Header from "@/app/components/Header";
 import React, { useEffect, useState } from "react";
 import { FaFilter, FaSearch } from "react-icons/fa";
@@ -6,7 +6,6 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import CheckBoxList from "@/app/components/CheckBoxList";
 import OrganizationCard from "../components/OrganizationCard";
 import { IComedor } from "@/code/db/Comedor.Model";
-
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -17,8 +16,7 @@ const Search = () => {
   );
   const [selectedProvinces, setSelectedProvinces] = useState(Array<string>);
 
-  // Nueva función para obtener datos del backend
-  const fetchOrganizations = async (search : string) => {
+  const fetchOrganizations = async (search: string) => {
     try {
       const response = await fetch(
         `/api/comedor?search=${encodeURIComponent(search)}`
@@ -35,12 +33,10 @@ const Search = () => {
   };
 
   useEffect(() => {
-    // Llama a fetchOrganizations cuando cambia la búsqueda
     fetchOrganizations(search);
   }, [search]);
 
   useEffect(() => {
-    // Filtra las organizaciones obtenidas según el nombre y la provincia
     let result = organizations.filter((organization) =>
       organization.nombre.toLowerCase().includes(search.toLowerCase())
     );
@@ -95,9 +91,13 @@ const Search = () => {
             <section className="mt-2">
               <div className="space-y-4">
                 {filteredOrganizations.map(
-                  ({ fotoPerfil, nombre, descripcion, ubicacion }, index) => (
+                  (
+                    { _id, fotoPerfil, nombre, descripcion, ubicacion },
+                    index
+                  ) => (
                     <OrganizationCard
-                      key={index}
+                      key={_id ? String(_id) : `org-${index}`} // Convierte `_id` a string o usa `index` como respaldo
+                      id={_id as string} // Si `_id` es opcional, asegúrate de que sea `string`
                       fotoPerfil={fotoPerfil}
                       nombre={nombre}
                       descripcion={descripcion}
@@ -115,9 +115,7 @@ const Search = () => {
         <>
           <div className="p-10 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold text-black">
                     Provincias
@@ -131,14 +129,12 @@ const Search = () => {
                     </span>
                   </button>
                 </div>
-                {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <CheckBoxList
                     selectedProvinces={selectedProvinces}
                     setSelectedProvinces={setSelectedProvinces}
                   ></CheckBoxList>
                 </div>
-                {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                   <button
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

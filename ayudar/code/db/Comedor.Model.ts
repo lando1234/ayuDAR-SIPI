@@ -25,6 +25,7 @@ export interface Post {
   fecha: Date;
   contenido: string;
   estado: string;
+  titulo: string;
 }
 
 interface ContactoMensaje {
@@ -34,7 +35,7 @@ interface ContactoMensaje {
 }
 
 export interface IComedor extends Document {
-  id: number,
+  id : number;
   email: string;
   pass: string;
   nombre: string;
@@ -67,6 +68,7 @@ const postSchema = new Schema<Post>({
   fecha: { type: Date, required: true },
   contenido: { type: String, required: true },
   estado: { type: String, required: true },
+  titulo: { type: String },
 });
 
 const contactoMensajeSchema = new Schema<ContactoMensaje>({

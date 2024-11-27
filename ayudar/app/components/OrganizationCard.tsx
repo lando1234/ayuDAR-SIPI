@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useRouter } from "next/navigation";
 import Vector from "../icons/Vector.png";
 import { IComedor } from "@/code/db/Comedor.Model";
 import NotFoundImage from '../images/notFoundImg.jpg';
@@ -6,16 +7,23 @@ import NotFoundImage from '../images/notFoundImg.jpg';
 type OrganizationCardProps = Pick<
   IComedor,
   "fotoPerfil" | "nombre" | "descripcion" | "ubicacion"
->;
+> & { id: string }; // Agrega `id` aquí
 
 const OrganizationCard: FC<OrganizationCardProps> = ({
+  id,
   fotoPerfil,
   nombre,
   descripcion,
   ubicacion,
 }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/comedor/${id}`); // Navega a la página del comedor usando la `id`
+  };
+
   return (
-    <div className="bg-white shadow rounded-lg p-4 flex items-start">
+    <div className="bg-white shadow rounded-lg p-4 flex items-start cursor-pointer" onClick={handleClick}>
       <img
         src={fotoPerfil}
         alt="fotoPerfil"
