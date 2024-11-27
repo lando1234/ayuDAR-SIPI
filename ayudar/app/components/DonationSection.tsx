@@ -23,7 +23,7 @@ const DonationSection: FC<DonationSectionProps> = ({ posts, comedor }) => {
     <section className="mt-2">
       <div className="space-y-4">
         {posts.map((post, index) => (
-          <DonationCard key={index} post={post} comedor={comedor} showButton={true}/>
+          <DonationCard key={index} post={post} comedor={comedor} showButton={ sessionStorage.getItem("session")?true:false}/>
         ))}
       </div>
     </section>
