@@ -21,6 +21,7 @@ interface Contacto {
 }
 
 export interface Post {
+  _id?: string; // MongoDB convierte ObjectId a string
   tipo: string[];
   fecha: Date;
   contenido: string;
@@ -35,7 +36,7 @@ interface ContactoMensaje {
 }
 
 export interface IComedor extends Document {
-  id : number;
+  id: number;
   email: string;
   pass: string;
   nombre: string;
@@ -63,13 +64,16 @@ const contactoSchema = new Schema<Contacto>({
   web: { type: String },
 });
 
-const postSchema = new Schema<Post>({
-  tipo: { type: [String], required: true },
-  fecha: { type: Date, required: true },
-  contenido: { type: String, required: true },
-  estado: { type: String, required: true },
-  titulo: { type: String },
-});
+const postSchema = new Schema<Post>(
+  {
+    tipo: { type: [String], required: true },
+    fecha: { type: Date, required: true },
+    contenido: { type: String, required: true },
+    estado: { type: String, required: true },
+    titulo: { type: String },
+  },
+  { _id: true } // Garantiza que cada subdocumento tenga su propio _id
+);
 
 const contactoMensajeSchema = new Schema<ContactoMensaje>({
   mail: { type: String, required: true },
@@ -93,8 +97,19 @@ const ComedorSchema = new Schema<IComedor>(
     posts: { type: [postSchema], required: true },
     contactos: { type: [contactoMensajeSchema], required: true },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 ); // Agrega marcas de tiempo (createdAt, updatedAt)
+
+// Transformar el _id de ObjectId a string al serializar los datos
+ComedorSchema.set("toJSON", {
+  transform: (_doc, ret) => {
+    ret.posts = ret.posts.map((post: any) => ({
+      ...post,
+      _id: post._id.toString(), // Convierte el ObjectId a string
+    }));
+    return ret;
+  },
+});
 
 // Middleware para hashear la contraseña antes de guardarla
 ComedorSchema.pre<IComedor>("save", async function (next) {

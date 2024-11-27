@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 // Método GET para obtener los datos de un comedor por su ID
 export async function GET(request: Request, { params }: { params: { id: string } }) {
     try {
-  
-  
+      
+      console.log(params.id);
       if (!params.id) {
         return NextResponse.json(
           { message: "El ID proporcionado no es válido." },

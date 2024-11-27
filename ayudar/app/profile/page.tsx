@@ -204,7 +204,7 @@ const MyProfile = () => {
         <div className="space-y-2 mt-4">
           <h2 className="text-lg text-gray-500">Actividad</h2>
           {comedorData?.posts && comedorData?.posts.length > 0 ? (
-            <DonationSection posts={comedorData.posts} comedor={comedorData} />
+            <DonationSection posts={comedorData.posts} comedor={comedorData}/>
           ) : (
             <p>No hay actividad disponible.</p> // Mensaje de fallback en caso de que no haya posts
           )}

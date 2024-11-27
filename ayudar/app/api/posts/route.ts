@@ -1,4 +1,4 @@
-import { updatePost, deletePost, getPostsWithComedorNames } from "@/code/services/posts.service";
+import { deletePost, getPostsWithComedorNames, UpdatePostParams, updateComedorPost } from "@/code/services/posts.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -15,8 +15,9 @@ export async function GET() {
 
 export async function PUT(req: NextRequest) {
   try {
-    const { id, fecha, tipo, contenido, estado } = await req.json();
-    const comedorActualizado = await updatePost(id, new Date(fecha), tipo, contenido, estado);
+    const post:UpdatePostParams = await req.json();
+
+    const comedorActualizado = await updateComedorPost(post);
     return NextResponse.json(comedorActualizado, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {

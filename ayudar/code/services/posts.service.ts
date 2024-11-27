@@ -48,35 +48,49 @@ export const createPost = async (comedorId: string, postData: Post): Promise<ICo
     }
   }
 };
+export interface UpdatePostParams {
+  comedorId: string;
+  postId: string; // ID del post a actualizar
+  tipo?: string[]; // Opcional: Nuevos tipos
+  contenido?: string; // Opcional: Nuevo contenido
+  estado?: string; // Opcional: Nuevo estado
+}
 
-export const updatePost = async (
-  id: number,
-  fecha: Date,
-  tipo: string[],
-  contenido: string,
-  estado: string
-) => {
-  await connectDB();
+export const updateComedorPost = async ({
+  comedorId,
+  postId,
+  tipo,
+  contenido,
+  estado,
+}: UpdatePostParams) => {
+  try {
+    // Conectar a la base de datos
+    await connectDB();
 
-  const comedor = await ComedorModel.findOneAndUpdate(
-    { id, "posts.fecha": fecha },
-    {
-      $set: {
-        "posts.$.tipo": tipo,
-        "posts.$.contenido": contenido,
-        "posts.$.estado": estado,
-      },
-    },
-    { new: true }
-  );
+    // Construir el objeto de actualización dinámicamente
+    const updateFields: any = {};
+    if (tipo) updateFields["posts.$.tipo"] = tipo;
+    if (contenido) updateFields["posts.$.contenido"] = contenido;
+    if (estado) updateFields["posts.$.estado"] = estado;
 
-  if (!comedor) {
-    throw new Error("Comedor o post no encontrado");
+    // Actualizar el post del comedor
+    const updatedComedor = await ComedorModel.findOneAndUpdate(
+      { _id: comedorId, "posts._id": postId }, // Encuentra el comedor y el post por ID
+      { $set: updateFields }, // Actualiza los campos necesarios
+      { new: true } // Retorna el documento actualizado
+    );
+
+    // Manejar el caso donde no se encontró el comedor o el post
+    if (!updatedComedor) {
+      throw new Error("Comedor o post no encontrado");
+    }
+
+    return updatedComedor;
+  } catch (error: any) {
+    console.error("Error al actualizar el post del comedor:", error.message);
+    throw new Error(`Error al actualizar el post: ${error.message}`);
   }
-
-  return comedor;
 };
-
 export const deletePost = async (id: number, fecha: Date) => {
   await connectDB();
 
