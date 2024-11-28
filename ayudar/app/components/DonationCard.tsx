@@ -19,7 +19,7 @@ export interface DonationCardProps {
 }
 
 // Enum para los estados del post
-enum PostEstado {
+export enum PostEstado {
   Activo = "Activo",
   Completo = "Completo",
 }

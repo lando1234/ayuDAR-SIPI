@@ -9,21 +9,27 @@ import VoluntarioIcon from "./icons/VoluntariadoIcon.png";
 import fondo from "./images/fondo.jpg";
 import SaberMas from "./icons/SaberMas.png";
 import Header from "./components/Header";
-import DonationCard, { DonationCardProps } from "./components/DonationCard";
+import DonationCard, { DonationCardProps, PostEstado } from "./components/DonationCard";
+import SliderButton from "./components/SliderButton";
+import Loader from "./components/Loader";
 
 
 
 const Home = () => {
   const [posts, setPosts] = useState<DonationCardProps[]>([]);
-
+  const [filteredPosts, setFilteredPosts] = useState<DonationCardProps[]>([]);
+  const [filtered, setFiltered] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const fetchPosts = async () => {
     try {
       const response = await fetch("/api/posts");
-      const {data} = await response.json();
-  
+      const { data }: { data: DonationCardProps[] } = await response.json();
+
       // Verifica que 'data' sea un array antes de asignarlo a 'posts'
       if (Array.isArray(data)) {
         setPosts(data);
+        setFilteredPosts([...data].filter(p=> p.post.estado === PostEstado.Activo));
+        setLoaded(true);
       } else {
         console.error("La respuesta no es un array:", data);
         setPosts([]); // Establece posts como array vacío si la respuesta no es un array
@@ -36,8 +42,17 @@ const Home = () => {
 
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if(posts.length === 0) {
+      fetchPosts();
+    }
+
+  }, [posts.length]);
+
+  const toggleHandler = (value: boolean) => {
+    setFiltered(value);
+  }
+
+  const render = (posts: DonationCardProps[],key:string) => posts.map((post,index) => ( <DonationCard key={index+key} post={post.post} comedor={post.comedor} showButton={false}/>))
 
   return (
     <div className="relative min-h-screen bg-gray-100">
@@ -193,15 +208,19 @@ const Home = () => {
       
         {/* Main Content */}
       <main className="p-4">
+        <SliderButton onToggle={toggleHandler}/>
         <h2 className="text-lg font-semibold mb-4 text-black">
           Enterate qué necesita cada comedor
         </h2>
-
+        {
+          !loaded?(<div className="flex justify-center my-4">
+            <Loader></Loader>
+          </div>): null
+        }
+        
         {/* Renderizando directamente DonationCard */}
         <div className="space-y-4">
-          {posts.map((post, index) => (
-            <DonationCard key={index} post={post.post} comedor={post.comedor} showButton={false}/>
-          ))}
+          {filtered?render(filteredPosts,'f'):render(posts,'u')}
         </div>
       </main>
       </main>
